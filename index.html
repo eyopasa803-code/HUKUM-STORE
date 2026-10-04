@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HÜKÜM STORE</title>
+<style>
+:root{
+  --bg:#F1F3F6; --card:#FFFFFF; --ink:#0E1B2C; --mute:#5E6E80; --line:#DDE2E8;
+  --red:#C8232C; --on-red:#FFFFFF; --brass:#B8892B; --ok:#1E7A4F; --chip:#E4E8ED;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0A1320;--card:#13233A;--ink:#EDF1F5;--mute:#98A8BA;--line:#25374F;--red:#E5444C;--brass:#D9A93F;--ok:#4CC38A;--chip:#1B2E48}
+}
+:root[data-theme="dark"]{--bg:#0A1320;--card:#13233A;--ink:#EDF1F5;--mute:#98A8BA;--line:#25374F;--red:#E5444C;--brass:#D9A93F;--ok:#4CC38A;--chip:#1B2E48}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.4;padding-bottom:72px}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto}
+
+/* üst çubuk */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);padding:10px 12px 8px}
+.bar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:4px 6px;min-height:50px}
+.ib{border:0;background:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;flex:none}
+.ib:active{background:var(--chip)}
+.sbtn{flex:1;text-align:left;border:0;background:none;color:var(--mute);font-size:15px;padding:10px 4px}
+.av{width:34px;height:34px;border-radius:50%;background:var(--red);color:var(--on-red);font-weight:800;display:grid;place-items:center;border:0;flex:none;margin-right:3px}
+.page{padding:6px 14px 20px}
+.back{display:flex;align-items:center;gap:6px;padding:4px 0 10px;font-weight:700;font-size:18px}
+.back button{border:0;background:none;font-size:22px;width:36px;height:36px;border-radius:50%}
+
+/* kartlar */
+h2{font-size:18px;margin:20px 0 10px;letter-spacing:-.2px}
+.hero{border-radius:16px;padding:18px;background:var(--ink);color:var(--bg);position:relative;overflow:hidden}
+.hero h1{margin:0 0 6px;font-size:21px;letter-spacing:-.5px;line-height:1.2;max-width:85%}
+.hero p{margin:0 0 14px;font-size:14px;opacity:.85;max-width:85%}
+.hero .mark{position:absolute;right:-18px;top:-18px;width:110px;height:110px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-size:48px;font-weight:900;color:var(--on-red);opacity:.95;padding:30px 0 0 0}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:700;background:var(--red);color:var(--on-red);min-height:46px}
+.btn.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
+.btn.sm{padding:8px 16px;min-height:38px;font-size:14px;border-radius:20px}
+.btn.full{width:100%}
+.btn.on-dark{background:var(--bg);color:var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 2px;scrollbar-width:none}
+.chip{border:0;background:var(--chip);padding:8px 16px;border-radius:20px;font-weight:600;font-size:14px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.hs{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.tile{flex:0 0 108px;text-align:left;border:0;background:none;padding:0}
+.tile .ico{width:108px;height:108px;font-size:48px;border-radius:24px}
+.tile b{display:block;font-size:14px;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile span{font-size:12px;color:var(--mute)}
+.ico{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;font-size:30px;flex:none;color:#fff}
+.item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left}
+.item .m{flex:1;min-width:0}
+.item .m b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .m span{font-size:13px;color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h3{margin:0 0 6px;font-size:16px}
+.muted{color:var(--mute);font-size:14px}
+.stats{display:flex;text-align:center;margin:14px 0}
+.stats div{flex:1}
+.stats b{display:block;font-size:20px}
+.stats span{font-size:12px;color:var(--mute)}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--chip);color:var(--mute);vertical-align:middle;margin-left:6px}
+.badge.red{background:var(--red);color:var(--on-red)}
+label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px}
+input,textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+textarea{min-height:170px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+.token{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;background:var(--chip);padding:8px 10px;border-radius:8px;word-break:break-all}
+.row{display:flex;gap:10px;align-items:center}
+.plan.on{border-color:var(--red);box-shadow:0 0 0 2px var(--red)}
+.plan ul{margin:6px 0 12px;padding-left:18px;color:var(--mute);font-size:14px}
+.set{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.set:last-child{border-bottom:0}
+.set small{display:block;color:var(--mute)}
+.sw{position:relative;width:48px;height:28px;border-radius:14px;border:0;background:var(--line);flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s}
+.sw[aria-checked="true"]{background:var(--red)}
+.sw[aria-checked="true"]::after{left:23px}
+.seg{display:flex;background:var(--chip);border-radius:10px;padding:3px}
+.seg button{border:0;background:none;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--card)}
+.empty{text-align:center;color:var(--mute);padding:40px 10px}
+.empty .big{font-size:42px}
+details{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+summary{font-weight:600;padding:8px 0}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px}
+.gi{border:0;background:none;padding:0;text-align:center;min-width:0}
+.gi .ico{width:100%;height:auto;aspect-ratio:1;max-width:72px;margin:0 auto;font-size:34px;border-radius:18px}
+.gi span{display:block;font-size:12px;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* alt menü */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;padding:8px 0 7px;font-size:11px;color:var(--mute);font-weight:600;min-height:56px}
+nav button i{display:block;font-style:normal;font-size:20px;line-height:1.2}
+nav button[aria-current="true"]{color:var(--red)}
+
+/* yan menü */
+.scrim{position:fixed;inset:0;background:rgba(5,10,18,.55);z-index:30;display:none}
+.scrim.open{display:block}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(82vw,320px);background:var(--card);z-index:31;transform:translateX(-102%);transition:transform .2s;padding-top:env(safe-area-inset-top,0px);overflow-y:auto}
+.drawer.open{transform:none}
+.dh{padding:20px 18px;background:var(--ink);color:var(--bg)}
+.dh .seal{width:52px;height:52px;border-radius:50%;background:var(--red);color:var(--on-red);display:grid;place-items:center;font-weight:900;font-size:24px;box-shadow:inset 0 0 0 3px var(--red),inset 0 0 0 5px rgba(255,255,255,.55);margin-bottom:10px}
+.dh b{font-size:18px;letter-spacing:-.4px}
+.dh div{font-size:13px;opacity:.8}
+.dl button{display:flex;align-items:center;gap:16px;width:100%;border:0;background:none;padding:14px 20px;font-size:15px;font-weight:600;text-align:left}
+.dl button:active{background:var(--chip)}
+.dl hr{border:0;border-top:1px solid var(--line);margin:6px 0}
+
+/* diğer */
+.sheet-bg{position:fixed;inset:0;background:rgba(5,10,18,.6);z-index:40;display:none;align-items:flex-end}
+.sheet-bg.open{display:flex}
+.sheet{background:var(--card);width:100%;max-width:560px;margin:0 auto;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px))}
+.runner{position:fixed;inset:0;background:var(--bg);z-index:50;display:none;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.runner.open{display:flex}
+.runner .rb{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--card);border-bottom:1px solid var(--line)}
+.runner iframe{flex:1;border:0;width:100%;background:#fff}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:12px;font-size:14px;z-index:60;display:none;max-width:90%;text-align:center}
+.prog{height:6px;background:var(--chip);border-radius:3px;overflow:hidden;margin-top:12px}
+.prog i{display:block;height:100%;width:0;background:var(--red);transition:width 1.1s linear}
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#C8232C">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HÜKÜM">
+</head>
+<body>
+<div class="wrap">
+  <div class="top" id="top">
+    <div class="bar">
+      <button class="ib" onclick="openDrawer()" aria-label="Menü">☰</button>
+      <button class="sbtn" onclick="tabTo('search')">HÜKÜM STORE'da ara</button>
+      <button class="av" id="avBtn" onclick="tabTo('profile')" aria-label="Profil">?</button>
+    </div>
+  </div>
+  <main id="view" class="page"></main>
+</div>
+
+<nav aria-label="Ana menü">
+  <button data-tab="home"><i>🏪</i>Mağaza</button>
+  <button data-tab="search"><i>🔎</i>Ara</button>
+  <button data-tab="rewards"><i>🎁</i>Ödül</button>
+  <button data-tab="dev"><i>🛠️</i>Geliştir</button>
+  <button data-tab="profile"><i>👤</i>Profil</button>
+</nav>
+
+<div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" aria-label="Yan menü">
+  <div class="dh"><div class="seal">H</div><b>HÜKÜM STORE</b><div id="dUser">Giriş yapılmadı</div></div>
+  <div class="dl">
+    <button onclick="dgo('home')"><span>🏪</span>Mağaza</button>
+    <button onclick="dgo('home','oyun')"><span>🎮</span>Oyunlar</button>
+    <button onclick="dgo('home','uygulama')"><span>📱</span>Uygulamalar</button>
+    <button onclick="dgo('library')"><span>📥</span>Kurduklarım</button>
+    <hr>
+    <button onclick="dgo('rewards')"><span>🎁</span>Ödüller ve görevler</button>
+    <button onclick="dgo('leaderboard')"><span>🏆</span>Sıralama</button>
+    <button onclick="dgo('favs')"><span>⭐</span>Favorilerim</button>
+    <button onclick="dgo('plans')"><span>👑</span>Üyelik paketleri</button>
+    <button onclick="dgo('dev')"><span>🛠️</span>Geliştirici paneli</button>
+    <hr>
+    <button onclick="dgo('profile')"><span>👤</span>Profilim</button>
+    <button onclick="dgo('settings')"><span>⚙️</span>Ayarlar</button>
+    <button onclick="dgo('about')"><span>ℹ️</span>Hakkında</button>
+    <button onclick="closeDrawer();openInstall()"><span>⬇️</span>Uygulamayı indir</button>
+  </div>
+</aside>
+
+<div class="sheet-bg" id="sheetBg" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
+<div class="runner" id="runner"><div class="rb"><button class="ib" onclick="closeRunner()" aria-label="Kapat">✕</button><b id="runName"></b></div><iframe id="runFrame" sandbox="allow-scripts" title="Uygulama"></iframe></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+var APK_URL=""; // APK linkini buraya yaz: "https://siten.com/hukum-store.apk"
+var PUBLISH_COST=10000;
+var PLANS=[
+ {id:"bronz",name:"HÜKÜM BRONZ",pts:2000,slots:1,note:""},
+ {id:"plus",name:"HÜKÜM PLUS",pts:5000,slots:3,note:"Popüler"},
+ {id:"premium",name:"HÜKÜM PREMİUM",pts:10000,slots:7,note:""},
+ {id:"gold",name:"HÜKÜM GOLD",pts:20000,slots:15,note:""},
+ {id:"elmas",name:"HÜKÜM ELMAS",pts:40000,slots:999,note:"Sınırsız"}
+];
+var COLORS=["#C8232C","#1F5FA8","#1E7A4F","#B8892B","#6B3FA0","#C2571A","#0E7C86","#8A2B55"];
+var DEMO=[
+ {id:"d1",name:"Hüküm Blok",icon:"🧱",cat:"oyun",desc:"Bloklara dokun, puanı topla.",dev:"HÜKÜM",ver:"1.0",
+  code:'<body style="margin:0;font-family:sans-serif;text-align:center;background:#0E1B2C;color:#fff"><h2 style="padding-top:30px">Hüküm Blok</h2><div id=s style="font-size:48px">0</div><div id=b style="margin:30px auto;width:120px;height:120px;background:#C8232C;border-radius:14px;position:relative"></div><p>Bloğa dokun!</p><script>var n=0,b=document.getElementById("b");b.onclick=function(){n++;document.getElementById("s").textContent=n;b.style.left=((Math.random()*60)-30)+"%";b.style.top=(Math.random()*60)+"px"}<\/script></body>'},
+ {id:"d2",name:"Zar At",icon:"🎲",cat:"oyun",desc:"İki zar at, şansını dene.",dev:"HÜKÜM",ver:"1.0",
+  code:'<body style="margin:0;font-family:sans-serif;text-align:center;background:#1E7A4F;color:#fff"><h2 style="padding-top:30px">Zar At</h2><div id=z style="font-size:90px;margin:30px">⚀ ⚀</div><button id=r style="font-size:20px;padding:14px 30px;border:0;border-radius:12px">Zarları at</button><script>var f=["⚀","⚁","⚂","⚃","⚄","⚅"];document.getElementById("r").onclick=function(){document.getElementById("z").textContent=f[Math.floor(Math.random()*6)]+" "+f[Math.floor(Math.random()*6)]}<\/script></body>'},
+ {id:"d3",name:"Hızlı Not",icon:"📝",cat:"uygulama",desc:"Notlarını yaz, otomatik kaydedilsin.",dev:"HÜKÜM",ver:"1.0",
+  code:'<body style="margin:0;font-family:sans-serif;padding:16px"><h3>Hızlı Not</h3><textarea id=t style="width:100%;height:60vh;font-size:16px;padding:10px" placeholder="Bir şeyler yaz..."></textarea><script>var t=document.getElementById("t");try{t.value=localStorage.getItem("n")||""}catch(e){}t.oninput=function(){try{localStorage.setItem("n",t.value)}catch(e){}}<\/script></body>'}
+];
+
+/* ---- veri (prototipte sadece bu cihazda) ---- */
+var DB_KEY="hukum_db_v2",SES_KEY="hukum_ses_v2",SET_KEY="hukum_set_v2";
+var memDB={users:{},installed:[]},memSes=null,memSet=null;
+function loadDB(){try{var r=localStorage.getItem(DB_KEY);if(r){var d=JSON.parse(r);d.installed=d.installed||[];return d}}catch(e){}return memDB}
+function saveDB(d){memDB=d;try{localStorage.setItem(DB_KEY,JSON.stringify(d))}catch(e){}}
+function getSes(){try{return localStorage.getItem(SES_KEY)||memSes}catch(e){return memSes}}
+function setSes(u){memSes=u;try{u?localStorage.setItem(SES_KEY,u):localStorage.removeItem(SES_KEY)}catch(e){}}
+function getSet(){try{var r=localStorage.getItem(SET_KEY);if(r)return JSON.parse(r)}catch(e){}return memSet||{theme:"auto",notif:true}}
+function putSet(s){memSet=s;try{localStorage.setItem(SET_KEY,JSON.stringify(s))}catch(e){}}
+function me(){var u=getSes();return u?loadDB().users[u]:null}
+function saveMe(m){var d=loadDB();d.users[m.name]=m;saveDB(d)}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function fmt(n){return n>=999?"Sınırsız":Number(n).toLocaleString("tr-TR")}
+function hash(s){if(window.crypto&&crypto.subtle){return crypto.subtle.digest("SHA-256",new TextEncoder().encode("hukum:"+s)).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,"0")}).join("")})}var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return Promise.resolve("w"+h)}
+function genToken(){var a=new Uint8Array(18);crypto.getRandomValues(a);return"HKM-"+Array.from(a).map(function(x){return x.toString(16).padStart(2,"0")}).join("").toUpperCase()}
+function toast(t){var e=document.getElementById("toast");e.textContent=t;e.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(function(){e.style.display="none"},2600)}
+function colorOf(id){var h=0;for(var i=0;i<id.length;i++)h=(h*31+id.charCodeAt(i))>>>0;return COLORS[h%COLORS.length]}
+function allApps(){var l=DEMO.slice(),d=loadDB();Object.keys(d.users).forEach(function(n){(d.users[n].apps||[]).forEach(function(a){if(a.code)l.push({id:a.id,name:a.name,icon:a.icon||"📦",cat:a.cat||"uygulama",desc:a.desc||"Geliştirici uygulaması",dev:n,ver:a.ver,code:a.code})})});return l}
+function appById(id){return allApps().filter(function(a){return a.id===id})[0]}
+function isInst(id){return loadDB().installed.indexOf(id)>-1}
+function icoHTML(a,cls){return'<div class="ico '+(cls||"")+'" style="background:'+colorOf(a.id)+'">'+esc(a.icon)+'</div>'}
+
+/* ---- gezinme ---- */
+var view="home",vid="",stack=[],filter="hepsi";
+function tabTo(v){stack=[];view=v;vid="";render()}
+function go(v,id){stack.push({v:view,i:vid});view=v;vid=id||"";render()}
+function back(){var p=stack.pop();if(p){view=p.v;vid=p.i}else{view="home";vid=""}render()}
+function dgo(v,f){closeDrawer();if(f)filter=f;else if(v==="home")filter="hepsi";tabTo(v)}
+function openDrawer(){document.getElementById("drawer").classList.add("open");document.getElementById("scrim").classList.add("open")}
+function closeDrawer(){document.getElementById("drawer").classList.remove("open");document.getElementById("scrim").classList.remove("open")}
+function backBar(t){return'<div class="back"><button onclick="back()" aria-label="Geri">←</button>'+t+'</div>'}
+
+function render(){
+  var m=me(),v=document.getElementById("view");
+  var root=["home","search","rewards","dev","profile"];
+  var navTab=root.indexOf(view)>-1?view:(view==="detail"||view==="library"?"home":(view==="plans"||view==="settings"||view==="about"||view==="favs"?"profile":(view==="leaderboard"?"rewards":"")));
+  document.querySelectorAll("nav button").forEach(function(b){b.setAttribute("aria-current",b.dataset.tab===navTab?"true":"false")});
+  document.getElementById("avBtn").textContent=m?m.name.charAt(0).toUpperCase():"?";
+  document.getElementById("dUser").textContent=m?m.name+" · "+fmt(m.points)+" puan":"Giriş yapılmadı";
+  document.getElementById("top").style.display=(view==="search")?"none":"block";
+  var fn={home:vHome,search:vSearch,dev:vDev,profile:vProfile,plans:vPlans,settings:vSettings,about:vAbout,detail:vDetail,library:vLibrary,rewards:vRewards,leaderboard:vBoard,favs:vFavs}[view]||vHome;
+  v.innerHTML=fn(m);
+  if(view==="search"){var i=document.getElementById("q");if(i){i.focus();doSearch()}}
+  window.scrollTo(0,0);
+}
+
+/* ---- ekranlar ---- */
+function appRow(a){return'<button class="item" onclick="go(\'detail\',\''+a.id+'\')">'+icoHTML(a)+'<div class="m"><b>'+esc(a.name)+'</b><span>'+esc(a.dev)+' · '+(a.cat==="oyun"?"Oyun":"Uygulama")+(isInst(a.id)?' · Kurulu':'')+rateTxt(a.id)+'</span></div></button>'}
+function vHome(){
+  var l=allApps().filter(function(a){return filter==="hepsi"||a.cat===filter});
+  var h='<div class="hero"><div class="mark" aria-hidden="true">H</div><h1>Yerli ve milli uygulama mağazası</h1><p>Oyunları ve uygulamaları keşfet, kur, kendi uygulamanı yayınla.</p><div class="row"><button class="btn on-dark sm" onclick="openInstall()">Mağazayı indir</button><button class="btn sm" onclick="addGame()">+ Oyun ekle</button></div></div>';
+  h+=updatesHTML();h+=shelfHTML();h+=dailyCard();
+  h+='<div class="chips" style="margin-top:14px">'+[["hepsi","Hepsi"],["oyun","Oyunlar"],["uygulama","Uygulamalar"]].map(function(c){return'<button class="chip" aria-pressed="'+(filter===c[0])+'" onclick="filter=\''+c[0]+'\';render()">'+c[1]+'</button>'}).join("")+'</div>';
+  if(!l.length)return h+'<div class="empty"><div class="big">📭</div>Bu kategoride henüz uygulama yok.</div>';
+  h+='<h2>Öne çıkanlar</h2><div class="hs">'+sortBoost(l).map(function(a){return'<button class="tile" onclick="go(\'detail\',\''+a.id+'\')">'+icoHTML(a)+'<b>'+esc(a.name)+'</b><span>'+(a.cat==="oyun"?"Oyun":"Uygulama")+'</span></button>'}).join("")+'</div>';
+  h+='<h2>Tüm uygulamalar</h2>'+l.map(appRow).join("");
+  return h;
+}
+function shelfHTML(){
+  var inst=allApps().filter(function(a){return isInst(a.id)});
+  var h='<h2>Ana ekranım</h2>';
+  if(!inst.length)return h+'<div class="card"><div class="muted">Kurduğun oyunlar ve uygulamalar burada görünür. Aşağıdan birini seç ve Kur\'a bas.</div></div>';
+  return h+'<div class="grid">'+inst.map(function(a){return'<button class="gi" onclick="runApp(\''+a.id+'\')" aria-label="'+esc(a.name)+' aç">'+icoHTML(a)+'<span>'+esc(a.name)+'</span></button>'}).join("")+'</div>';
+}
+function addGame(){var m=me();if(!m){toast("Oyun eklemek için önce giriş yap");return tabTo("profile")}tabTo("dev");var i=document.getElementById("an");if(i)i.focus()}
+var ICONS=["🎮","🧩","🎯","⚔️","🎲","🚀","🧱","🏎️","⚽","👾"];
+var SAMPLE='<body style="margin:0;background:#0E1B2C;color:#fff;font-family:sans-serif;text-align:center"><h2>Balon Patlat</h2><div id=s>Puan: 0</div><div id=a style="position:relative;height:70vh"></div><script>var p=0,a=document.getElementById("a");function b(){var e=document.createElement("div");e.textContent="🎈";e.style.cssText="position:absolute;font-size:48px;left:"+(Math.random()*80)+"%;top:"+(Math.random()*80)+"%";e.onclick=function(){p++;document.getElementById("s").textContent="Puan: "+p;e.remove()};a.appendChild(e);setTimeout(function(){e.remove()},1800)}setInterval(b,600)<\/script></body>';
+function pickIcon(b){document.querySelectorAll("#icp .chip").forEach(function(c){c.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true")}
+function fillSample(){document.getElementById("nc").value=SAMPLE;toast("Örnek oyun kodu eklendi")}
+function copyTok(t){try{navigator.clipboard.writeText(t).then(function(){toast("Kopyalandı")},function(){toast("Tokeni elle kopyala")})}catch(e){toast("Tokeni elle kopyala")}}
+function showToken(name,tok){
+  document.getElementById("sheet").innerHTML='<h3 style="margin:0 0 8px">'+esc(name)+' yayında 🎉</h3><p class="muted">Mağazada göründü. Güncelleme yüklerken bu tokeni gireceksin, sakla.</p><div class="token">'+esc(tok)+'</div><div class="row" style="margin-top:14px"><button class="btn" style="flex:1" onclick="copyTok(\''+tok+'\')">Tokeni kopyala</button><button class="btn alt" onclick="closeSheet()">Kapat</button></div>';
+  document.getElementById("sheetBg").classList.add("open");
+}
+function vSearch(){
+  return'<div class="bar" style="margin:10px 0"><button class="ib" onclick="tabTo(\'home\')" aria-label="Geri">←</button><input id="q" type="search" placeholder="Oyun veya uygulama ara" oninput="doSearch()" style="border:0;background:none;padding:10px 4px;margin:0"></div><div id="res"></div>';
+}
+function doSearch(){
+  var q=(document.getElementById("q").value||"").trim().toLowerCase(),r=document.getElementById("res");
+  var l=allApps().filter(function(a){return!q||(a.name+" "+a.desc+" "+a.dev+" "+a.cat).toLowerCase().indexOf(q)>-1});
+  r.innerHTML=l.length?(q?'':'<h2 style="margin-top:6px">Tüm uygulamalar</h2>')+l.map(appRow).join(""):'<div class="empty"><div class="big">🔍</div>"'+esc(q)+'" için sonuç yok.<br>Başka bir kelime dene.</div>';
+}
+function vDetail(){
+  var a=appById(vid);if(!a)return backBar("Uygulama")+'<div class="empty">Uygulama bulunamadı.</div>';
+  var inst=isInst(a.id);
+  var h=backBar("")+'<div class="row" style="align-items:flex-start;gap:16px">'+icoHTML(a).replace('class="ico "','class="ico" ').replace("width:","width:")+'<div><div style="font-size:22px;font-weight:800;letter-spacing:-.4px;line-height:1.2">'+esc(a.name)+'</div><div class="muted">'+esc(a.dev)+'</div><div class="muted">'+(a.cat==="oyun"?"Oyun":"Uygulama")+' · v'+esc(a.ver)+'</div></div></div>';
+  h=h.replace('class="ico"','class="ico" style="width:84px;height:84px;font-size:42px;border-radius:20px;background:'+colorOf(a.id)+'"');
+  h+='<div class="row" style="margin:18px 0" id="ab">';
+  var upd=inst&&needsUpd(a);
+  h+=inst?(upd?'<button class="btn" style="flex:1" onclick="update(\''+a.id+'\')">Güncelle (v'+esc(a.ver)+')</button>':'<button class="btn" style="flex:1" onclick="runApp(\''+a.id+'\')">Aç</button>')+'<button class="btn alt" onclick="uninstall(\''+a.id+'\')">Kaldır</button>':'<button class="btn" style="flex:1" onclick="install(\''+a.id+'\')">Kur</button>';
+  h+='<button class="ib" style="box-shadow:inset 0 0 0 2px var(--line);width:46px;height:46px" aria-label="Favori" onclick="toggleFav(\''+a.id+'\')">'+(isFav(a.id)?"❤️":"🤍")+'</button>';
+  h+='</div><div class="card"><h3>Hakkında</h3><div class="muted">'+esc(a.desc)+'</div></div>';
+  if(inst)h+='<div class="card"><h3>Ana ekranda</h3><div class="muted">Bu oyun Mağaza sayfasındaki "Ana ekranım" bölümüne eklendi. Telefonunun kendi ana ekranına koymak için tarayıcı menüsünden "Ana ekrana ekle"yi kullan. Her oyunun kendi simgesi sunucu aşamasında gelecek.</div></div>';
+  h+=reviewsHTML(a);
+  return h;
+}
+function install(id){
+  var ab=document.getElementById("ab");
+  ab.innerHTML='<div style="flex:1"><b>İndiriliyor...</b><div class="prog"><i id="pg"></i></div></div>';
+  setTimeout(function(){document.getElementById("pg").style.width="100%"},30);
+  setTimeout(function(){var d=loadDB();if(d.installed.indexOf(id)<0)d.installed.push(id);d.instVer=d.instVer||{};var _a=appById(id);d.instVer[id]=_a?_a.ver:"1.0";d.cnt=d.cnt||{};d.cnt[id]=(d.cnt[id]||0)+1;saveDB(d);toast("Kuruldu, ana ekranına eklendi");render()},1200);
+}
+function uninstall(id){var d=loadDB();d.installed=d.installed.filter(function(x){return x!==id});saveDB(d);toast("Kaldırıldı");render()}
+function vLibrary(){
+  var l=allApps().filter(function(a){return isInst(a.id)});
+  return backBar("Kurduklarım")+(l.length?l.map(appRow).join(""):'<div class="empty"><div class="big">📥</div>Henüz bir şey kurmadın.<br><br><button class="btn" onclick="tabTo(\'home\')">Mağazaya git</button></div>');
+}
+function vProfile(m){
+  if(!m)return'<div class="card" style="margin-top:8px"><h3>Giriş yap</h3><div class="muted">Uygulama yayınlamak ve puan kazanmak için hesabın olmalı.</div><label for="u">Kullanıcı adı</label><input id="u" autocomplete="username" autocapitalize="none"><label for="p">Şifre</label><input id="p" type="password" autocomplete="current-password"><div class="row" style="margin-top:14px"><button class="btn" style="flex:1" onclick="auth(false)">Giriş yap</button><button class="btn alt" style="flex:1" onclick="auth(true)">Kayıt ol</button></div></div><div class="card"><div class="muted">Bu prototipte hesaplar sadece bu cihazda tutulur. Herkesin ortak hesabı için sunucu eklenecek.</div></div><button class="btn alt full" onclick="go(\'settings\')">⚙️ Ayarlar</button>';
+  var p=PLANS.filter(function(x){return x.id===m.plan})[0],lib=loadDB().installed.length;
+  var h='<div class="card" style="margin-top:8px;text-align:center"><div class="av" style="width:72px;height:72px;font-size:30px;margin:0 auto 10px">'+esc(m.name.charAt(0).toUpperCase())+'</div><div style="font-size:20px;font-weight:800">'+esc(m.name)+'</div><div class="muted">'+(p?p.name:"Üyelik paketi yok")+' · '+lvl(m.xp||0).name+'</div>';
+  h+='<div class="stats"><div><b>'+fmt(m.points)+'</b><span>Puan</span></div><div><b>'+(m.apps||[]).length+'</b><span>Yayınladığım</span></div><div><b>'+lib+'</b><span>Kurduğum</span></div></div>';
+  h+=p?'<button class="btn full" onclick="claimWeekly()">Haftalık puanımı al</button>':'<button class="btn full" onclick="go(\'plans\')">Paket seç</button>';
+  h+='</div><div class="card" style="padding:0 14px">';
+  [["🎁","Ödüller ve görevler","rewards"],["⭐","Favorilerim","favs"],["🏆","Sıralama","leaderboard"],["📥","Kurduklarım","library"],["👑","Üyelik paketleri","plans"],["🛠️","Geliştirici paneli","dev"],["⚙️","Ayarlar","settings"],["ℹ️","Hakkında","about"]].forEach(function(r){h+='<button class="set" style="width:100%;border:0;background:none;text-align:left" onclick="'+(r[2]==="dev"?"tabTo('dev')":"go('"+r[2]+"')")+'"><span>'+r[0]+'&nbsp;&nbsp;'+r[1]+'</span><span class="muted">›</span></button>'});
+  return h+'</div><button class="btn alt full" onclick="logout()">Çıkış yap</button>';
+}
+function vPlans(m){
+  var h=backBar("Üyelik paketleri")+'<div class="card"><div class="muted">Her paket haftalık puan ve ücretsiz yayın hakkı verir. Ek yayınlar '+fmt(PUBLISH_COST)+' puandır. Bu prototipte paketler ücretsiz denenir.</div></div>';
+  PLANS.forEach(function(p){var on=m&&m.plan===p.id;h+='<div class="card plan'+(on?" on":"")+'"><h3>'+p.name+(p.note?'<span class="badge red">'+p.note+'</span>':"")+'</h3><ul><li>Haftada '+fmt(p.pts)+' HÜKÜM puanı</li><li>'+(p.slots>=999?"Sınırsız":p.slots)+' ücretsiz yayın hakkı</li></ul><button class="btn'+(on?" alt":"")+' full" onclick="pickPlan(\''+p.id+'\')">'+(on?"Aktif paketin":"Bu paketi seç")+'</button></div>'});
+  return h;
+}
+function vDev(m){
+  if(!m)return'<h2 style="margin-top:6px">Geliştirici paneli</h2><div class="card"><div class="muted">Uygulama yayınlamak için önce giriş yapmalısın.</div></div><button class="btn full" onclick="tabTo(\'profile\')">Giriş yap</button>';
+  var p=PLANS.filter(function(x){return x.id===m.plan})[0],free=p?Math.max(0,p.slots-(m.freeUsed||0)):0;
+  var h='<h2 style="margin-top:6px">Oyun / uygulama ekle</h2><div class="card"><div class="muted">Ücretsiz yayın hakkın: <b>'+(free>=900?"Sınırsız":free)+'</b> · Puanın: <b>'+fmt(m.points)+'</b><br>Hakkın yoksa '+fmt(PUBLISH_COST)+' puan düşer.</div><label for="an">Adı</label><input id="an" maxlength="30" placeholder="Örn: Hüküm Blok"><label for="ad">Kısa açıklama</label><input id="ad" maxlength="80"><label for="ac">Kategori</label><select id="ac"><option value="oyun">Oyun</option><option value="uygulama">Uygulama</option></select><label>Simge</label><div class="chips" id="icp">'+ICONS.map(function(e,i){return'<button class="chip" style="font-size:20px" aria-pressed="'+(i===0)+'" data-e="'+e+'" onclick="pickIcon(this)">'+e+'</button>'}).join("")+'</div><label for="nc">Kod (HTML / JS / CSS)</label><textarea id="nc" placeholder="<h1>Merhaba</h1>"></textarea><div class="row" style="margin:10px 0"><button class="btn alt sm" onclick="fillSample()">Örnek oyun kodu koy</button></div><button class="btn full" onclick="publish()">Yayınla</button></div><h2>Uygulamalarım</h2>';
+  if(!(m.apps||[]).length)h+='<div class="empty"><div class="big">🧑‍💻</div>Henüz uygulaman yok.</div>';
+  (m.apps||[]).forEach(function(a,i){h+='<div class="card"><div class="row">'+icoHTML(a)+'<div><b>'+esc(a.name)+'</b><span class="badge">v'+esc(a.ver)+'</span><div class="muted">'+(a.code?"Yayında":"Kod bekleniyor")+'</div></div></div><label>Token</label><div class="token">'+esc(a.token)+'</div>'+boostBtn(a)+'<details'+(a.code?"":" open")+'><summary>Kod yükle / güncelle</summary><label for="tk'+i+'">Token</label><input id="tk'+i+'" placeholder="HKM-..." autocapitalize="characters"><label for="cd'+i+'">Kod (HTML / JS / CSS)</label><textarea id="cd'+i+'" placeholder="<h1>Merhaba</h1>">'+esc(a.code||"")+'</textarea><div class="row" style="margin-top:10px"><button class="btn" style="flex:1" onclick="uploadCode('+i+')">Yükle</button><button class="btn alt" onclick="runApp(\''+a.id+'\')">Dene</button></div></details></div>'});
+  return h;
+}
+function vSettings(){
+  var s=getSet();
+  var seg=[["auto","Otomatik"],["light","Açık"],["dark","Koyu"]].map(function(t){return'<button aria-pressed="'+(s.theme===t[0])+'" onclick="setTheme(\''+t[0]+'\')">'+t[1]+'</button>'}).join("");
+  return backBar("Ayarlar")+'<div class="card" style="padding:0 14px"><div class="set"><div>Tema<small>Görünümü seç</small></div><div class="seg">'+seg+'</div></div><div class="set"><div>Bildirimler<small>Güncelleme haberleri</small></div><button class="sw" role="switch" aria-checked="'+s.notif+'" aria-label="Bildirimler" onclick="toggleNotif()"></button></div><div class="set"><div>Uygulamayı indir<small>APK veya ana ekran</small></div><button class="btn sm" onclick="openInstall()">İndir</button></div></div><div class="card" style="padding:0 14px"><div class="set"><div>Kurulumları temizle<small>Kurduklarım listesini sıfırlar</small></div><button class="btn alt sm" onclick="clearInst()">Temizle</button></div><div class="set"><div>Tüm verileri sil<small>Hesap, puan ve uygulamalar silinir</small></div><button class="btn alt sm" onclick="wipe()">Sil</button></div></div>';
+}
+function vAbout(){return backBar("Hakkında")+'<div class="card" style="text-align:center"><div class="av" style="width:64px;height:64px;font-size:28px;margin:0 auto 10px">H</div><h3>HÜKÜM STORE</h3><div class="muted">Sürüm 0.4 (prototip)<br>Yerli ve milli uygulama mağazası.<br>Hiçbir dış servise bağlı değil.</div></div>'}
+
+/* ---- puan, seviye, görev, ödül ---- */
+var BOOST_COST=2000;
+var LEVELS=[[0,"Çaylak"],[5000,"Er"],[15000,"Savaşçı"],[40000,"Komutan"],[100000,"Hükümdar"]];
+var COUPONS={"HUKUM2026":1000,"YERLI":2500,"MILLI":1500};
+function lvl(xp){var i=0;for(var k=0;k<LEVELS.length;k++)if(xp>=LEVELS[k][0])i=k;var nx=LEVELS[i+1];return{i:i,name:LEVELS[i][1],next:nx?nx[0]:null,nname:nx?nx[1]:null,pct:nx?Math.round((xp-LEVELS[i][0])/(nx[0]-LEVELS[i][0])*100):100}}
+function addPts(m,n,why){m.points=(m.points||0)+n;if(n>0)m.xp=(m.xp||0)+n;m.log=m.log||[];m.log.unshift({n:n,w:why,t:Date.now()});if(m.log.length>40)m.log.length=40}
+var MISSIONS=[
+ {id:"m1",t:"İlk oyununu kur",r:500,f:function(m){return[loadDB().installed.length,1]}},
+ {id:"m2",t:"3 uygulama kur",r:1000,f:function(m){return[loadDB().installed.length,3]}},
+ {id:"m3",t:"İlk oyununu yayınla",r:2000,f:function(m){return[(m.apps||[]).length,1]}},
+ {id:"m4",t:"Bir uygulamaya yorum yaz",r:500,f:function(m){return[m.reviewed||0,1]}},
+ {id:"m5",t:"2 uygulamayı favoriye ekle",r:500,f:function(m){return[(m.favs||[]).length,2]}},
+ {id:"m6",t:"3 gün üst üste giriş yap",r:1000,f:function(m){return[m.streak||0,3]}},
+ {id:"m7",t:"Bir üyelik paketi seç",r:1000,f:function(m){return[m.plan?1:0,1]}},
+ {id:"m8",t:"Kupon kodu kullan",r:300,f:function(m){return[(m.coupons||[]).length,1]}}
+];
+function claimMission(id){var m=me(),x=MISSIONS.filter(function(k){return k.id===id})[0];m.missions=m.missions||{};if(m.missions[id])return;var f=x.f(m);if(f[0]<f[1])return toast("Görev henüz bitmedi");m.missions[id]=true;addPts(m,x.r,"Görev: "+x.t);saveMe(m);toast("+"+fmt(x.r)+" puan kazandın");render()}
+function dailyPreview(m){var t=new Date().toDateString(),y=new Date(Date.now()-864e5).toDateString();var n=m.lastDaily===y?(m.streak||0)+1:(m.lastDaily===t?(m.streak||0):1);return 100+Math.min(Math.max(n,1)-1,6)*50}
+function dailyClaim(){var m=me();if(!m)return;var t=new Date().toDateString();if(m.lastDaily===t)return toast("Bugünkü ödülü aldın");var y=new Date(Date.now()-864e5).toDateString();m.streak=(m.lastDaily===y)?(m.streak||0)+1:1;var r=100+Math.min(m.streak-1,6)*50;m.lastDaily=t;addPts(m,r,"Günlük ödül ("+m.streak+". gün)");saveMe(m);toast("+"+r+" puan! Seri: "+m.streak+" gün 🔥");render()}
+function redeem(){var m=me(),c=(document.getElementById("cp").value||"").trim().toUpperCase();if(!c)return toast("Kupon kodunu yaz");if(!COUPONS[c])return toast("Geçersiz kupon kodu");m.coupons=m.coupons||[];if(m.coupons.indexOf(c)>-1)return toast("Bu kuponu zaten kullandın");m.coupons.push(c);addPts(m,COUPONS[c],"Kupon: "+c);saveMe(m);toast("+"+fmt(COUPONS[c])+" puan eklendi");render()}
+function dailyCard(){var m=me();if(!m||m.lastDaily===new Date().toDateString())return"";return'<div class="card" style="margin-top:14px"><div class="row"><div style="font-size:28px">🎁</div><div style="flex:1"><b>Günlük ödülün hazır</b><div class="muted">+'+dailyPreview(m)+' puan</div></div><button class="btn sm" onclick="dailyClaim()">Al</button></div></div>'}
+function loginNeed(t){return backBar(t)+'<div class="card"><div class="muted">Bunun için önce giriş yapmalısın.</div></div><button class="btn full" onclick="tabTo(\'profile\')">Giriş yap</button>'}
+function vRewards(m){
+  if(!m)return'<h2 style="margin-top:6px">Ödüller ve görevler</h2><div class="card"><div class="muted">Puan kazanmak için giriş yap. Günlük ödül, görevler ve kuponlar seni bekliyor.</div></div><button class="btn full" onclick="tabTo(\'profile\')">Giriş yap</button>';
+  var L=lvl(m.xp||0),t=new Date().toDateString(),can=m.lastDaily!==t;
+  var h='<h2 style="margin-top:6px">Ödüller ve görevler</h2><div class="card"><div class="row"><div style="font-size:30px">🏅</div><div style="flex:1"><b style="font-size:18px">'+L.name+'</b><div class="muted">'+fmt(m.xp||0)+' XP'+(L.next?' · sonraki: '+L.nname+' ('+fmt(L.next)+')':' · en yüksek seviye')+'</div></div></div><div class="prog" style="margin-top:10px"><i style="width:'+L.pct+'%;transition:none"></i></div><button class="btn alt sm" style="margin-top:12px" onclick="go(\'leaderboard\')">🏆 Sıralamayı gör</button></div>';
+  h+='<div class="card"><h3>Günlük ödül</h3><div class="muted">Seri: <b>'+(m.streak||0)+' gün</b> 🔥 · Her gün ödül büyür, 7. güne kadar.</div><button class="btn full" style="margin-top:12px"'+(can?'':' disabled')+' onclick="dailyClaim()">'+(can?'Bugünkü ödülü al (+'+dailyPreview(m)+')':'Bugünkü ödül alındı ✓')+'</button></div>';
+  h+='<div class="card"><h3>Kupon kodu</h3><div class="row"><input id="cp" placeholder="Kodu yaz" autocapitalize="characters" style="margin:0"><button class="btn" onclick="redeem()">Kullan</button></div><div class="muted" style="margin-top:8px">Dene: HUKUM2026</div></div>';
+  h+='<h2>Görevler</h2>';
+  MISSIONS.forEach(function(x){var f=x.f(m),done=f[0]>=f[1],cl=(m.missions||{})[x.id],pc=Math.min(100,Math.round(f[0]/f[1]*100));h+='<div class="card"><div class="row"><div style="flex:1"><b>'+x.t+'</b><div class="muted">Ödül: '+fmt(x.r)+' puan · '+Math.min(f[0],f[1])+'/'+f[1]+'</div></div>'+(cl?'<span class="badge">Alındı ✓</span>':'<button class="btn sm"'+(done?'':' disabled')+' onclick="claimMission(\''+x.id+'\')">Ödülü al</button>')+'</div><div class="prog" style="margin-top:10px"><i style="width:'+pc+'%;transition:none"></i></div></div>'});
+  h+='<h2>Puan geçmişi</h2>';
+  var lg=(m.log||[]).slice(0,10);
+  h+=lg.length?'<div class="card" style="padding:0 14px">'+lg.map(function(x){return'<div class="set"><div>'+esc(x.w)+'<small>'+new Date(x.t).toLocaleDateString("tr-TR")+'</small></div><b style="color:'+(x.n>0?"var(--ok)":"var(--red)")+'">'+(x.n>0?"+":"")+fmt(x.n)+'</b></div>'}).join("")+'</div>':'<div class="empty">Henüz puan hareketi yok.</div>';
+  return h;
+}
+function vBoard(){
+  var d=loadDB(),me0=getSes(),u=Object.keys(d.users).map(function(k){return d.users[k]}).sort(function(a,b){return(b.xp||0)-(a.xp||0)}).slice(0,15);
+  var h=backBar("Sıralama")+'<div class="card"><div class="muted">Bu cihazdaki oyuncular. Sunucu gelince herkes bu listede yarışacak.</div></div>';
+  if(!u.length)return h+'<div class="empty"><div class="big">🏆</div>Henüz oyuncu yok.</div>';
+  var medals=["🥇","🥈","🥉"];
+  return h+'<div class="card" style="padding:0 14px">'+u.map(function(x,i){return'<div class="set"><div>'+(medals[i]||(i+1)+".")+' <b>'+esc(x.name)+'</b>'+(x.name===me0?'<span class="badge red">Sen</span>':'')+'<small>'+lvl(x.xp||0).name+'</small></div><b>'+fmt(x.xp||0)+' XP</b></div>'}).join("")+'</div>';
+}
+/* ---- favori, yorum, güncelleme, öne çıkarma ---- */
+function isFav(id){var m=me();return!!m&&(m.favs||[]).indexOf(id)>-1}
+function toggleFav(id){var m=me();if(!m)return toast("Favori için giriş yap");m.favs=m.favs||[];var i=m.favs.indexOf(id);if(i>-1)m.favs.splice(i,1);else m.favs.push(id);saveMe(m);render()}
+function vFavs(m){if(!m)return loginNeed("Favorilerim");var l=allApps().filter(function(a){return isFav(a.id)});return backBar("Favorilerim")+(l.length?l.map(appRow).join(""):'<div class="empty"><div class="big">⭐</div>Henüz favorin yok.<br>Uygulama sayfasındaki kalbe bas.</div>')}
+function stars(n){return"★★★★★".slice(0,n)+"☆☆☆☆☆".slice(0,5-n)}
+function avgOf(id){var rv=(loadDB().reviews||{})[id]||[];return rv.length?rv.reduce(function(s,x){return s+x.s},0)/rv.length:0}
+function rateTxt(id){var a=avgOf(id);return a?' · ★'+a.toFixed(1):''}
+var pickedStar=0;
+function pickStar(b){pickedStar=parseInt(b.dataset.s,10);document.querySelectorAll("#stp .chip").forEach(function(c){c.setAttribute("aria-pressed",c===b?"true":"false")})}
+function sendReview(id){var m=me();if(!pickedStar)return toast("Önce yıldız seç");var c=(document.getElementById("rt").value||"").trim();var d=loadDB();d.reviews=d.reviews||{};var l=d.reviews[id]=d.reviews[id]||[];var ex=l.filter(function(x){return x.u===m.name})[0];if(ex){ex.s=pickedStar;ex.c=c}else{l.unshift({u:m.name,s:pickedStar,c:c,t:Date.now()});m.reviewed=(m.reviewed||0)+1}saveDB(d);saveMe(m);pickedStar=0;toast("Yorumun kaydedildi");render()}
+function reviewsHTML(a){
+  var rv=(loadDB().reviews||{})[a.id]||[],m=me(),avg=avgOf(a.id);pickedStar=0;
+  var h='<h2>Puan ve yorumlar</h2><div class="card"><div class="row"><div style="font-size:34px;font-weight:800">'+(rv.length?avg.toFixed(1):"–")+'</div><div><div style="color:var(--brass);font-size:18px">'+stars(Math.round(avg))+'</div><div class="muted">'+rv.length+' değerlendirme</div></div></div>';
+  if(m)h+='<label>Senin puanın</label><div class="chips" id="stp">'+[1,2,3,4,5].map(function(n){return'<button class="chip" aria-pressed="false" data-s="'+n+'" onclick="pickStar(this)">'+n+' ★</button>'}).join("")+'</div><label for="rt">Yorumun</label><input id="rt" maxlength="120"><button class="btn full" style="margin-top:12px" onclick="sendReview(\''+a.id+'\')">Gönder</button>';
+  else h+='<div class="muted" style="margin-top:10px">Yorum yazmak için giriş yap.</div>';
+  h+='</div>';
+  rv.slice(0,6).forEach(function(x){h+='<div class="card"><b>'+esc(x.u)+'</b> <span style="color:var(--brass)">'+stars(x.s)+'</span>'+(x.c?'<div class="muted">'+esc(x.c)+'</div>':'')+'</div>'});
+  return h;
+}
+function needsUpd(a){var iv=loadDB().instVer||{};return!!iv[a.id]&&iv[a.id]!==a.ver}
+function progBar(){var ab=document.getElementById("ab");if(!ab)return;ab.innerHTML='<div style="flex:1"><b>İndiriliyor...</b><div class="prog"><i id="pg"></i></div></div>';setTimeout(function(){var g=document.getElementById("pg");if(g)g.style.width="100%"},30)}
+function update(id){progBar();setTimeout(function(){var d=loadDB(),a=appById(id);d.instVer=d.instVer||{};d.instVer[id]=a?a.ver:"1.0";saveDB(d);toast("Güncellendi");render()},1200)}
+function updateAll(){var d=loadDB();d.instVer=d.instVer||{};allApps().forEach(function(a){if(isInst(a.id)&&needsUpd(a))d.instVer[a.id]=a.ver});saveDB(d);toast("Hepsi güncellendi");render()}
+function updatesHTML(){var l=allApps().filter(function(a){return isInst(a.id)&&needsUpd(a)});if(!l.length)return"";return'<div class="card" style="margin-top:14px"><div class="row"><div style="font-size:26px">⬆️</div><div style="flex:1"><b>'+l.length+' güncelleme var</b><div class="muted">'+l.map(function(a){return esc(a.name)}).join(", ")+'</div></div><button class="btn sm" onclick="updateAll()">Güncelle</button></div></div>'}
+function sortBoost(l){var b=loadDB().boosts||{},n=Date.now();return l.slice().sort(function(x,y){return((b[y.id]||0)>n)-((b[x.id]||0)>n)})}
+function boostBtn(a){var b=(loadDB().boosts||{})[a.id];if(b>Date.now())return'<div class="muted" style="margin:10px 0">🚀 Öne çıkarılıyor, '+Math.ceil((b-Date.now())/36e5)+' saat kaldı</div>';return'<button class="btn alt sm" style="margin:10px 0" onclick="boost(\''+a.id+'\')">🚀 Öne çıkar ('+fmt(BOOST_COST)+' puan, 24 saat)</button>'}
+function boost(id){var m=me();if(m.points<BOOST_COST)return toast("Yetersiz puan");addPts(m,-BOOST_COST,"Öne çıkarma");saveMe(m);var d=loadDB();d.boosts=d.boosts||{};d.boosts[id]=Date.now()+864e5;saveDB(d);toast("Uygulaman 24 saat öne çıkarıldı");render()}
+
+/* ---- işlemler ---- */
+function applyTheme(){var s=getSet(),r=document.documentElement;if(s.theme==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",s.theme)}
+function setTheme(t){var s=getSet();s.theme=t;putSet(s);applyTheme();render()}
+function toggleNotif(){var s=getSet();s.notif=!s.notif;putSet(s);render()}
+function clearInst(){var d=loadDB();d.installed=[];saveDB(d);toast("Temizlendi");render()}
+function wipe(){if(!confirm("Tüm veriler silinecek. Emin misin?"))return;try{localStorage.removeItem(DB_KEY);localStorage.removeItem(SES_KEY)}catch(e){}memDB={users:{},installed:[]};memSes=null;toast("Veriler silindi");tabTo("home")}
+function auth(reg){
+  var u=document.getElementById("u").value.trim().toLowerCase(),p=document.getElementById("p").value;
+  if(!/^[a-z0-9_]{3,20}$/.test(u))return toast("Kullanıcı adı 3-20 karakter: harf, rakam veya _");
+  if(p.length<6)return toast("Şifre en az 6 karakter olmalı");
+  hash(u+p).then(function(h){var d=loadDB();
+    if(reg){if(d.users[u])return toast("Bu kullanıcı adı alınmış");d.users[u]={name:u,hash:h,points:0,plan:"",apps:[],freeUsed:0,lastClaim:0};saveDB(d);setSes(u);toast("Hesabın oluşturuldu");go("plans");return}
+    if(!d.users[u]||d.users[u].hash!==h)return toast("Kullanıcı adı veya şifre yanlış");
+    setSes(u);toast("Hoş geldin, "+u);tabTo("home")});
+}
+function logout(){setSes(null);tabTo("home")}
+function pickPlan(id){var m=me();if(!m){toast("Önce giriş yap");return tabTo("profile")}var p=PLANS.filter(function(x){return x.id===id})[0];if(m.plan===id)return;m.plan=id;m.freeUsed=0;m.lastClaim=Date.now();addPts(m,p.pts,p.name+" paketi");saveMe(m);toast(p.name+" aktif, "+fmt(p.pts)+" puan eklendi");render()}
+function claimWeekly(){var m=me(),p=PLANS.filter(function(x){return x.id===m.plan})[0];if(!p)return;var left=7*864e5-(Date.now()-(m.lastClaim||0));if(left>0)return toast("Sonraki puan "+Math.ceil(left/864e5)+" gün sonra");addPts(m,p.pts,"Haftalık puan");m.lastClaim=Date.now();m.freeUsed=0;saveMe(m);toast(fmt(p.pts)+" puan eklendi");render()}
+function publish(){
+  var m=me(),name=document.getElementById("an").value.trim(),desc=document.getElementById("ad").value.trim(),cat=document.getElementById("ac").value,code=document.getElementById("nc").value;
+  var ib=document.querySelector('#icp .chip[aria-pressed="true"]'),icon=ib?ib.dataset.e:"🎮";
+  if(name.length<2)return toast("Önce adını yaz");
+  if(!code.trim())return toast("Kodu yaz ya da örnek kodu koy");
+  var p=PLANS.filter(function(x){return x.id===m.plan})[0],free=p&&(m.freeUsed||0)<p.slots;
+  if(free)m.freeUsed=(m.freeUsed||0)+1;else{if(m.points<PUBLISH_COST)return toast("Yetersiz puan. Gereken: "+fmt(PUBLISH_COST)+". Paket alarak puan kazan.")  ;addPts(m,-PUBLISH_COST,"Yayın ücreti: "+name)}
+  var tok=genToken();
+  m.apps.push({id:"a"+Date.now().toString(36),name:name,desc:desc,cat:cat,icon:icon,token:tok,ver:"1.0",code:code});
+  saveMe(m);render();showToken(name,tok);
+}
+function uploadCode(i){
+  var m=me(),a=m.apps[i],tk=document.getElementById("tk"+i).value.trim(),code=document.getElementById("cd"+i).value;
+  if(tk!==a.token)return toast("Token yanlış");if(!code.trim())return toast("Kod boş");
+  var first=!a.code;a.code=code;if(first)a.ver="1.0";else{var s=a.ver.split(".");a.ver=s[0]+"."+(parseInt(s[1]||"0",10)+1)}
+  saveMe(m);toast(first?"Yayında, sürüm "+a.ver:"Güncellendi, sürüm "+a.ver);render();
+}
+function runApp(id){var a=appById(id);if(!a||!a.code)return toast("Bu uygulamaya henüz kod yüklenmemiş");document.getElementById("runName").textContent=a.name;document.getElementById("runFrame").srcdoc=a.code;document.getElementById("runner").classList.add("open")}
+function closeRunner(){document.getElementById("runner").classList.remove("open");document.getElementById("runFrame").srcdoc=""}
+
+/* ---- indirme ---- */
+var deferredPrompt=null;
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredPrompt=e});
+function isIOS(){return/iphone|ipad|ipod/i.test(navigator.userAgent)}
+function openInstall(){
+  var h='<h3 style="margin:0 0 4px">HÜKÜM STORE\'u telefonuna indir</h3><p class="muted" style="margin:0 0 14px">Ana ekranına simge olarak gelir, uygulama gibi açılır.</p><button class="btn full" onclick="addToHome()">📲 Ana ekrana ekle</button>';
+  h+=APK_URL?'<a class="btn alt full" style="display:block;text-align:center;text-decoration:none;margin-top:10px" href="'+esc(APK_URL)+'" download>⬇️ APK indir (Android)</a><p class="muted">APK kurarken telefon "bilinmeyen kaynak" izni isterse izin ver.</p>':'<div class="card" style="margin-top:12px"><div class="muted">APK dosyası yakında. Hazır olunca burada "APK indir" tuşu çıkacak.</div></div>';
+  h+='<button class="btn alt full" style="margin-top:6px" onclick="closeSheet()">Kapat</button>';
+  document.getElementById("sheet").innerHTML=h;document.getElementById("sheetBg").classList.add("open");
+}
+function addToHome(){
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;closeSheet();return}
+  var t=isIOS()?'<h3 style="margin:0 0 8px">iPhone / iPad</h3><ol class="muted"><li>Safari\'de alttaki <b>Paylaş</b> simgesine bas.</li><li><b>Ana Ekrana Ekle</b>\'yi seç.</li><li><b>Ekle</b>\'ye bas.</li></ol>':'<h3 style="margin:0 0 8px">Android (Chrome)</h3><ol class="muted"><li>Sağ üstteki <b>⋮</b> menüyü aç.</li><li><b>Ana ekrana ekle</b> ya da <b>Uygulamayı yükle</b>\'ye bas.</li><li><b>Yükle</b>\'ye bas.</li></ol>';
+  document.getElementById("sheet").innerHTML=t+'<p class="muted">Sayfa bir önizleme içinde açıksa tek dokunuşla kurulum çalışmaz. Sitenin kendi adresinde açınca tuş direkt kurar.</p><button class="btn alt full" onclick="openInstall()">Geri</button>';
+}
+function doPwa(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt=null;closeSheet()}
+function closeSheet(){document.getElementById("sheetBg").classList.remove("open")}
+document.getElementById("sheetBg").addEventListener("click",function(e){if(e.target===this)closeSheet()});
+document.querySelectorAll("nav button").forEach(function(b){b.addEventListener("click",function(){if(b.dataset.tab==="home")filter="hepsi";tabTo(b.dataset.tab)})});
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}
+applyTheme();render();
+</script>
+</body>
+</html>
