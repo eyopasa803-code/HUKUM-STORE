@@ -1,0 +1,2 @@
+# HUKUM-STORE
+HÜKÜM İÇİN GELİŞTİRİLMİŞTİR 
