@@ -1,671 +1,601 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="dark">
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>HÜKÜM STORE - Yerli ve Millî Dijital İmparatorluk</title>
-    <link rel="manifest" href="manifest.webmanifest">
-    <meta name="theme-color" content="#0E1B2C">
-    <style>
-        :root {
-            --bg-primary: #0E1B2C;
-            --bg-secondary: #16263D;
-            --bg-card: #1E3352;
-            --accent: #C8232C;
-            --accent-hover: #E53942;
-            --text-main: #FFFFFF;
-            --text-muted: #94A3B8;
-            --border: #2A4365;
-            --success: #10B981;
-            --warning: #F59E0B;
-        }
-        [data-theme="light"] {
-            --bg-primary: #F8FAFC;
-            --bg-secondary: #EEF2F6;
-            --bg-card: #FFFFFF;
-            --accent: #C8232C;
-            --accent-hover: #A01C23;
-            --text-main: #0F172A;
-            --text-muted: #64748B;
-            --border: #CBD5E1;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg-primary); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; padding-bottom: 70px; }
-        
-        /* Header */
-        header { position: sticky; top: 0; z-index: 100; background: var(--bg-secondary); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
-        .header-left, .header-right { display: flex; align-items: center; gap: 12px; }
-        .icon-btn { background: none; border: none; color: var(--text-main); font-size: 20px; cursor: pointer; padding: 4px; }
-        .logo-title { font-weight: 800; font-size: 18px; color: var(--accent); letter-spacing: 0.5px; }
-        .profile-badge { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HÜKÜM STORE: Zırhlı Dijital İmparatorluk</title>
+<style>
+:root{
+  --bg:#F1F3F6; --card:#FFFFFF; --ink:#0E1B2C; --mute:#5E6E80; --line:#DDE2E8;
+  --red:#C8232C; --on-red:#FFFFFF; --brass:#B8892B; --ok:#1E7A4F; --chip:#E4E8ED;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0A1320;--card:#13233A;--ink:#EDF1F5;--mute:#98A8BA;--line:#25374F;--red:#E5444C;--brass:#D9A93F;--ok:#4CC38A;--chip:#1B2E48}
+}
+:root[data-theme="dark"]{--bg:#0A1320;--card:#13233A;--ink:#EDF1F5;--mute:#98A8BA;--line:#25374F;--red:#E5444C;--brass:#D9A93F;--ok:#4CC38A;--chip:#1B2E48}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.4;padding-bottom:72px}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto}
 
-        /* Drawer Menu */
-        .drawer { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: var(--bg-secondary); z-index: 1000; transition: 0.3s ease; box-shadow: 5px 0 25px rgba(0,0,0,0.5); border-right: 1px solid var(--border); display: flex; flex-direction: column; }
-        .drawer.open { left: 0; }
-        .drawer-header { padding: 24px 16px; background: var(--bg-card); border-bottom: 1px solid var(--border); }
-        .drawer-items { padding: 12px 0; overflow-y: auto; flex: 1; }
-        .drawer-item { padding: 12px 20px; display: flex; align-items: center; gap: 14px; color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 15px; cursor: pointer; transition: 0.2s; }
-        .drawer-item:hover { background: var(--bg-card); color: var(--accent); }
-        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; display: none; }
-        .overlay.active { display: block; }
+/* üst çubuk */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);padding:10px 12px 8px}
+.bar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:4px 6px;min-height:50px}
+.ib{border:0;background:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;flex:none}
+.ib:active{background:var(--chip)}
+.sbtn{flex:1;text-align:left;border:0;background:none;color:var(--mute);font-size:15px;padding:10px 4px}
+.av{width:34px;height:34px;border-radius:50%;background:var(--red);color:var(--on-red);font-weight:800;display:grid;place-items:center;border:0;flex:none;margin-right:3px}
+.page{padding:6px 14px 20px}
+.back{display:flex;align-items:center;gap:6px;padding:4px 0 10px;font-weight:700;font-size:18px}
+.back button{border:0;background:none;font-size:22px;width:36px;height:36px;border-radius:50%}
 
-        /* Main Content Views */
-        .view { display: none; padding: 16px; flex: 1; animation: fadeIn 0.2s ease; }
-        .view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+/* kartlar */
+h2{font-size:18px;margin:20px 0 10px;letter-spacing:-.2px}
+.hero{border-radius:16px;padding:18px;background:var(--ink);color:var(--bg);position:relative;overflow:hidden}
+.hero h1{margin:0 0 6px;font-size:21px;letter-spacing:-.5px;line-height:1.2;max-width:85%}
+.hero p{margin:0 0 14px;font-size:14px;opacity:.85;max-width:85%}
+.hero .mark{position:absolute;right:-18px;top:-18px;width:110px;height:110px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-size:48px;font-weight:900;color:var(--on-red);opacity:.95;padding:30px 0 0 0}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:700;background:var(--red);color:var(--on-red);min-height:46px}
+.btn.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
+.btn.sm{padding:8px 16px;min-height:38px;font-size:14px;border-radius:20px}
+.btn.full{width:100%}
+.btn.on-dark{background:var(--bg);color:var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 2px;scrollbar-width:none}
+.chip{border:0;background:var(--chip);padding:8px 16px;border-radius:20px;font-weight:600;font-size:14px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.hs{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.tile{flex:0 0 108px;text-align:left;border:0;background:none;padding:0}
+.tile .ico{width:108px;height:108px;font-size:48px;border-radius:24px}
+.tile b{display:block;font-size:14px;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile span{font-size:12px;color:var(--mute)}
+.ico{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;font-size:30px;flex:none;color:#fff}
+.item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left}
+.item .m{flex:1;min-width:0}
+.item .m b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.item .m span{font-size:13px;color:var(--mute)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h3{margin:0 0 6px;font-size:16px}
+.muted{color:var(--mute);font-size:14px}
+.stats{display:flex;text-align:center;margin:14px 0}
+.stats div{flex:1}
+.stats b{display:block;font-size:20px}
+.stats span{font-size:12px;color:var(--mute)}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--chip);color:var(--mute);vertical-align:middle;margin-left:6px}
+.badge.red{background:var(--red);color:var(--on-red)}
+.badge.brass{background:var(--brass);color:#fff}
+label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px}
+input,textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+textarea{min-height:170px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+.token{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;background:var(--chip);padding:8px 10px;border-radius:8px;word-break:break-all}
+.row{display:flex;gap:10px;align-items:center}
+.set{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.set:last-child{border-bottom:0}
+.set small{display:block;color:var(--mute)}
+.empty{text-align:center;color:var(--mute);padding:40px 10px}
+.empty .big{font-size:42px}
+details{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+summary{font-weight:600;padding:8px 0}
 
-        /* Bottom Nav */
-        nav.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: var(--bg-secondary); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 90; }
-        .nav-item { background: none; border: none; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; cursor: pointer; flex: 1; transition: 0.2s; }
-        .nav-item.active { color: var(--accent); }
-        .nav-item span.icon { font-size: 20px; }
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px}
+.gi{border:0;background:none;padding:0;text-align:center;min-width:0}
+.gi .ico{width:100%;height:auto;aspect-ratio:1;max-width:72px;margin:0 auto;font-size:34px;border-radius:18px}
+.gi span{display:block;font-size:12px;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-        /* Components & Cards */
-        .hero-banner { background: linear-gradient(135deg, #C8232C, #5a1217); border-radius: 16px; padding: 24px; color: white; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: 0 10px 25px rgba(200,35,44,0.3); }
-        .hero-banner h1 { font-size: 22px; margin-bottom: 8px; font-weight: 900; }
-        .hero-banner p { font-size: 13px; opacity: 0.9; margin-bottom: 16px; line-height: 1.4; }
-        .btn { background: var(--accent); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; }
-        .btn:hover { background: var(--accent-hover); }
-        .btn-secondary { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); }
-        
-        .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-        .app-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 12px; }
-        .app-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: 0.2s; position: relative; }
-        .app-card:hover { transform: translateY(-2px); border-color: var(--accent); }
-        .app-icon { width: 56px; height: 56px; border-radius: 14px; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .app-title { font-weight: bold; font-size: 14px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-        .app-cat { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
-        
-        /* Search Bar */
-        .search-box { display: flex; background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; align-items: center; gap: 10px; margin-bottom: 16px; }
-        .search-box input { background: none; border: none; color: var(--text-main); font-size: 15px; outline: none; width: 100%; }
+/* alt menü */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;padding:8px 0 7px;font-size:11px;color:var(--mute);font-weight:600;min-height:56px}
+nav button i{display:block;font-style:normal;font-size:20px;line-height:1.2}
+nav button[aria-current="true"]{color:var(--red)}
 
-        /* Sandbox Runner */
-        #sandboxModal { position: fixed; inset: 0; background: black; z-index: 2000; display: none; flex-direction: column; }
-        #sandboxHeader { background: #111; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; color: white; border-bottom: 1px solid #333; }
-        #sandboxFrame { flex: 1; border: none; background: white; width: 100%; height: 100%; }
+/* yan menü */
+.scrim{position:fixed;inset:0;background:rgba(5,10,18,.55);z-index:30;display:none}
+.scrim.open{display:block}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(82vw,320px);background:var(--card);z-index:31;transform:translateX(-102%);transition:transform .2s;padding-top:env(safe-area-inset-top,0px);overflow-y:auto}
+.drawer.open{transform:none}
+.dh{padding:20px 18px;background:var(--ink);color:var(--bg)}
+.dh .seal{width:52px;height:52px;border-radius:50%;background:var(--red);color:var(--on-red);display:grid;place-items:center;font-weight:900;font-size:24px;box-shadow:inset 0 0 0 3px var(--red),inset 0 0 0 5px rgba(255,255,255,.55);margin-bottom:10px}
+.dh b{font-size:18px;letter-spacing:-.4px}
+.dh div{font-size:13px;opacity:.8}
+.dl button{display:flex;align-items:center;gap:16px;width:100%;border:0;background:none;padding:14px 20px;font-size:15px;font-weight:600;text-align:left}
+.dl button:active{background:var(--chip)}
+.dl hr{border:0;border-top:1px solid var(--line);margin:6px 0}
 
-        /* Form Inputs */
-        input, select, textarea { width: 100%; background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-main); padding: 10px 14px; border-radius: 8px; font-size: 14px; margin-bottom: 12px; outline: none; }
-        input:focus, textarea:focus { border-color: var(--accent); }
-        label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; font-weight: bold; }
-        
-        .badge-role { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: bold; background: var(--accent); color: white; }
-    </style>
+.sheet-bg{position:fixed;inset:0;background:rgba(5,10,18,.6);z-index:40;display:none;align-items:flex-end}
+.sheet-bg.open{display:flex}
+.sheet{background:var(--card);width:100%;max-width:560px;margin:0 auto;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px))}
+.runner{position:fixed;inset:0;background:var(--bg);z-index:50;display:none;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.runner.open{display:flex}
+.runner .rb{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--card);border-bottom:1px solid var(--line)}
+.runner iframe{flex:1;border:0;width:100%;background:#fff}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:12px;font-size:14px;z-index:60;display:none;max-width:90%;text-align:center}
+.prog{height:6px;background:var(--chip);border-radius:3px;overflow:hidden;margin-top:12px}
+.prog i{display:block;height:100%;width:0;background:var(--red);transition:width 1.1s linear}
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#C8232C">
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="header-left">
-            <button class="icon-btn" onclick="toggleDrawer()">☰</button>
-            <div class="logo-title">HÜKÜM STORE</div>
-        </div>
-        <div class="header-right">
-            <button class="icon-btn" onclick="switchView('search')">🔍</button>
-            <div class="profile-badge" id="headerProfileBtn" onclick="switchView('profile')">H</div>
-        </div>
-    </header>
-
-    <!-- Drawer Menu -->
-    <div class="overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
-    <div class="drawer" id="mainDrawer">
-        <div class="drawer-header">
-            <h3 id="drawerUsername">Misafir Kullanıcı</h3>
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="drawerRole">Rütbe: Ziyaretçi</p>
-        </div>
-        <div class="drawer-items">
-            <a class="drawer-item" onclick="switchView('home'); toggleDrawer()">🏪 Mağaza Vitrini</a>
-            <a class="drawer-item" onclick="switchView('search'); toggleDrawer()">🔎 Arama & Filtre</a>
-            <a class="drawer-item" onclick="switchView('rewards'); toggleDrawer()">🎁 Ödüller & Görevler</a>
-            <a class="drawer-item" onclick="switchView('dev'); toggleDrawer()">🛠️ Geliştirici Paneli</a>
-            <a class="drawer-item" onclick="switchView('plans'); toggleDrawer()">👑 VIP Üyelik Paketleri</a>
-            <a class="drawer-item" onclick="switchView('settings'); toggleDrawer()">⚙️ Ayarlar</a>
-            <a class="drawer-item" id="adminDrawerLink" style="display:none; color: var(--accent);" onclick="switchView('admin'); toggleDrawer()">🛡️ Kurucu / Admin Odası</a>
-        </div>
+<div class="wrap">
+  <div class="top" id="top">
+    <div class="bar">
+      <button class="ib" onclick="openDrawer()" aria-label="Menü">☰</button>
+      <button class="sbtn" onclick="tabTo('search')">HÜKÜM STORE'da ara</button>
+      <button class="av" id="avBtn" onclick="tabTo('profile')" aria-label="Profil">?</button>
     </div>
+  </div>
+  <main id="view" class="page"></main>
+</div>
 
-    <!-- MAIN VIEWS -->
+<nav aria-label="Ana menü">
+  <button data-tab="home" onclick="tabTo('home')"><i>🏪</i>Mağaza</button>
+  <button data-tab="search" onclick="tabTo('search')"><i>🔎</i>Ara</button>
+  <button data-tab="rewards" onclick="tabTo('rewards')"><i>🎁</i>Ödül</button>
+  <button data-tab="dev" onclick="tabTo('dev')"><i>🛠️</i>Geliştir</button>
+  <button data-tab="profile" onclick="tabTo('profile')"><i>👤</i>Profil</button>
+</nav>
 
-    <!-- 1. HOME / STORE -->
-    <div id="view-home" class="view active">
-        <div class="hero-banner">
-            <h1>Zırhlı Dijital İmparatorluk</h1>
-            <p>Yerli ve milli çevrimdışı öncelikli (Offline-First) uygulama mağazası. En güvenli script ve bot deposu.</p>
-            <button class="btn" onclick="switchView('dev')">+ Uygulama / Script Ekle</button>
-        </div>
-        
-        <h3 style="margin-bottom: 8px;">Ana Ekranım (Raf Sistemi)</h3>
-        <div class="app-grid" id="installedAppsGrid">
-            <!-- Kurulanlar buraya gelecek -->
-        </div>
+<div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" aria-label="Yan menü">
+  <div class="dh"><div class="seal">H</div><b>HÜKÜM STORE</b><div id="dUser">Giriş yapılmadı</div></div>
+  <div class="dl">
+    <button onclick="dgo('home')"><span>🏪</span>Mağaza</button>
+    <button onclick="dgo('home','oyun')"><span>🎮</span>Oyunlar</button>
+    <button onclick="dgo('home','uygulama')"><span>📱</span>Uygulamalar</button>
+    <button onclick="dgo('library')"><span>📥</span>Kurduklarım</button>
+    <hr>
+    <button onclick="dgo('rewards')"><span>🎁</span>Ödüller ve görevler</button>
+    <button onclick="dgo('leaderboard')"><span>🏆</span>Sıralama</button>
+    <button onclick="dgo('favs')"><span>⭐</span>Favorilerim</button>
+    <button onclick="dgo('dev')"><span>🛠️</span>Geliştirici paneli</button>
+    <hr>
+    <button onclick="dgo('profile')"><span>👤</span>Profilim</button>
+    <button onclick="dgo('settings')"><span>⚙️</span>Ayarlar</button>
+    <button onclick="dgo('about')"><span>ℹ️</span>Hakkında</button>
+  </div>
+</aside>
 
-        <h3 style="margin: 20px 0 8px 0;">Öne Çıkanlar & Mağaza</h3>
-        <div class="app-grid" id="allAppsGrid">
-            <!-- Tüm uygulamalar buraya gelecek -->
-        </div>
-    </div>
+<div class="sheet-bg" id="sheetBg" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
+<div class="runner" id="runner"><div class="rb"><button class="ib" onclick="closeRunner()" aria-label="Kapat">✕</button><b id="runName"></b></div><iframe id="runFrame" sandbox="allow-scripts" title="Uygulama"></iframe></div>
+<div class="toast" id="toast" role="status"></div>
 
-    <!-- 2. SEARCH -->
-    <div id="view-search" class="view">
-        <div class="search-box">
-            <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="Oyun, python botu veya araç ara..." oninput="filterApps()">
-        </div>
-        <div class="app-grid" id="searchAppsGrid"></div>
-    </div>
+<script>
+/* --- HÜKÜM ÇEKİRDEK VERİTABANI & SİSTEMİ --- */
+var DB_KEY = "hukum_core_vault", SES_KEY = "hukum_session", SET_KEY = "hukum_settings";
 
-    <!-- 3. REWARDS -->
-    <div id="view-rewards" class="view">
-        <div class="card">
-            <h3>Seviye & Puan Durumu</h3>
-            <p style="font-size: 24px; font-weight: bold; color: var(--accent); margin: 8px 0;" id="userPointsDisplay">0 Puan</p>
-            <p style="font-size: 13px; color: var(--text-muted);" id="userLevelDisplay">Unvan: Çaylak</p>
-        </div>
-        <div class="card">
-            <h3>Günlük Ödül (Streak)</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Her gün giriş yap, katlanan bonus puanları kap!</p>
-            <button class="btn" onclick="claimDailyReward()">Günlük Bonusu Al (+100 Puan)</button>
-        </div>
-        <div class="card">
-            <h3>Kupon Kodu Kullan</h3>
-            <input type="text" id="couponInput" placeholder="Örn: HUKUM2026">
-            <button class="btn" onclick="useCoupon()">Kuponu Uygula</button>
-        </div>
-    </div>
+/* Varsayılan Kurucu Hesabı ve Örnek Veriler */
+var defaultDB = {
+  users: {
+    "EYO PAŞA!": { name: "EYO PAŞA!", pass: "Mr_eyo9801234509", role: "kurucu", points: 999999, xp: 999999, plan: "elmas", apps: [], favs: [], installed: [], streak: 30 }
+  },
+  installed: ["d1", "d2"],
+  logs: [{ t: Date.now(), txt: "Sistem zırhlı çekirdek başlatıldı. Kurucu EYO PAŞA! göreve hazır." }],
+  channels: [
+    { id: "c_log", name: "🛡️-güvenlik-logları", msgs: [{ sender: "Sistem", text: "Zırhlı Firewall aktif edildi." }] },
+    { id: "c_admin", name: "👑-admin-merkezi", msgs: [{ sender: "Kurucu", text: "Yönetim odası devrede." }] }
+  ],
+  tickets: []
+};
 
-    <!-- 4. DEVELOPER PANEL -->
-    <div id="view-dev" class="view">
-        <div class="card">
-            <h3>Geliştirici & Sandbox Paneli</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Kendi mini oyununu veya bot scriptini yaz, dünyaya sun.</p>
-            
-            <label>Uygulama / Oyun Adı</label>
-            <input type="text" id="devAppName" placeholder="Örn: Balon Patlatma">
-            
-            <label>Kısa Açıklama</label>
-            <input type="text" id="devAppDesc" placeholder="Harika bir mini oyun...">
-            
-            <label>Kategori</label>
-            <select id="devAppCat">
-                <option value="Oyun">Oyun</option>
-                <option value="Uygulama">Uygulama</option>
-                <option value="Bot / Script">Bot / Script</option>
-            </select>
+function loadDB() {
+  try {
+    var r = localStorage.getItem(DB_KEY);
+    if (r) { var d = JSON.parse(r); d.installed = d.installed || []; d.logs = d.logs || []; d.channels = d.channels || []; d.tickets = d.tickets || []; return d; }
+  } catch(e) {}
+  saveDB(defaultDB);
+  return defaultDB;
+}
+function saveDB(d) { try { localStorage.setItem(DB_KEY, JSON.stringify(d)); } catch(e) {} }
 
-            <label>Simge (Emoji)</label>
-            <input type="text" id="devAppIcon" value="🎮" maxlength="2">
+function getSes() { try { return localStorage.getItem(SES_KEY); } catch(e) { return null; } }
+function setSes(u) { try { u ? localStorage.setItem(SES_KEY, u) : localStorage.removeItem(SES_KEY); } catch(e) {} }
 
-            <label>Yayın Türü</label>
-            <select id="devPublishType">
-                <option value="free">1. Bedava (Herkes kurabilir)</option>
-                <option value="paid">2. Ücretli (Max 30 Bin Hüküm Puanı)</option>
-                <option value="request">3. Talep Et / Anlaşmalı (Kurucuya/Adminlere Bildirim Düşer)</option>
-            </select>
-            <input type="number" id="devAppPrice" placeholder="Ücret (Puan cinsinden, örn: 5000)" style="display:none;">
+function getSet() { try { var r = localStorage.getItem(SET_KEY); if (r) return JSON.parse(r); } catch(e) {} return { theme: "auto" }; }
+function putSet(s) { try { localStorage.setItem(SET_KEY, JSON.stringify(s)); } catch(e) {} }
 
-            <label>Kaynak Kod (HTML / JS / CSS)</label>
-            <textarea id="devAppCode" rows="6" placeholder="<!DOCTYPE html><html>...</html>"></textarea>
-            
-            <button class="btn-secondary" onclick="loadSampleGame()" style="margin-bottom: 10px; width: 100%;">Örnek Oyun Kodu Yükle</button>
-            <button class="btn" onclick="publishApp()" style="width: 100%;">Mağazada Yayınla</button>
-        </div>
-    </div>
+function me() { var u = getSes(); return u ? loadDB().users[u] : null; }
+function saveMe(m) { var d = loadDB(); d.users[m.name] = m; saveDB(d); }
 
-    <!-- 5. PROFILE & AUTH -->
-    <div id="view-profile" class="view">
-        <div class="card" id="authCard">
-            <h3>Giriş Yap / Kayıt Ol</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Hüküm İmparatorluğu'na katıl.</p>
-            <label>Kullanıcı Adı</label>
-            <input type="text" id="authUsername" placeholder="Kullanıcı adınız">
-            <label>Şifre</label>
-            <input type="password" id="authPassword" placeholder="Şifreniz">
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" onclick="handleAuth(true)" style="flex: 1;">Kayıt Ol</button>
-                <button class="btn btn-secondary" onclick="handleAuth(false)" style="flex: 1;">Giriş Yap</button>
-            </div>
-        </div>
+function logAction(txt) {
+  var d = loadDB();
+  d.logs.unshift({ t: Date.now(), txt: txt });
+  if (d.logs.length > 50) d.logs.length = 50;
+  saveDB(d);
+}
 
-        <div class="card" id="userPanelCard" style="display:none;">
-            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-                <div class="profile-badge" id="profileLargeAvatar" style="width: 50px; height: 50px; font-size: 22px;">H</div>
-                <div>
-                    <h3 id="profileUsernameText">Kullanıcı</h3>
-                    <span class="badge-role" id="profileRoleBadge">Üye</span>
-                </div>
-            </div>
-            <button class="btn btn-secondary" onclick="logout()" style="width: 100%;">Çıkış Yap</button>
-        </div>
-    </div>
+function esc(s) { return String(s || "").replace(/[&<>"']/g, function(c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function fmt(n) { return Number(n || 0).toLocaleString("tr-TR"); }
+function toast(t) { var e = document.getElementById("toast"); e.textContent = t; e.style.display = "block"; clearTimeout(e.t); e.t = setTimeout(function() { e.style.display = "none"; }, 2600); }
 
-    <!-- 6. PLANS -->
-    <div id="view-plans" class="view">
-        <div class="card">
-            <h3>👑 VIP Üyelik Paketleri</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0 16px 0;">Özel avantajlar ve sınırsız slotlar için paketini seç, talep et!</p>
-            
-            <div style="background: var(--bg-secondary); padding: 14px; border-radius: 10px; margin-bottom: 10px;">
-                <h4>Bronz Paket (2.000 Puan)</h4>
-                <p style="font-size: 12px; color: var(--text-muted);">Temel rozet ve haftalık 500 puan bonus.</p>
-                <button class="btn" style="margin-top: 8px; font-size: 12px; padding: 6px 12px;" onclick="requestPlan('Bronz Paket')">Talep Et</button>
-            </div>
-            <div style="background: var(--bg-secondary); padding: 14px; border-radius: 10px; margin-bottom: 10px;">
-                <h4>Elmas Paket (40.000 Puan)</h4>
-                <p style="font-size: 12px; color: var(--text-muted);">Sınırsız slot, özel kurucu koruması ve haftalık 10.000 puan.</p>
-                <button class="btn" style="margin-top: 8px; font-size: 12px; padding: 6px 12px;" onclick="requestPlan('Elmas Paket')">Talep Et</button>
-            </div>
-        </div>
-    </div>
+var COLORS = ["#C8232C","#1F5FA8","#1E7A4F","#B8892B","#6B3FA0","#C2571A","#0E7C86","#8A2B55"];
+function colorOf(id) { var h = 0; for(var i=0; i<id.length; i++) h = (h*31 + id.charCodeAt(i)) >>> 0; return COLORS[h % COLORS.length]; }
 
-    <!-- 7. SETTINGS -->
-    <div id="view-settings" class="view">
-        <div class="card">
-            <h3>Sistem Ayarları</h3>
-            <label style="margin-top: 10px;">Tema Seçimi</label>
-            <select id="themeSelect" onchange="changeTheme(this.value)">
-                <option value="dark">Koyu Tema (Dark)</option>
-                <option value="light">Açık Tema (Light)</option>
-            </select>
-            <button class="btn btn-secondary" onclick="wipeData()" style="margin-top: 16px; background: var(--accent); width: 100%;">Tüm Verileri Sıfırla (Wipe)</button>
-        </div>
-    </div>
+var DEMO = [
+  {id:"d1", name:"Hüküm Blok", icon:"🧱", cat:"oyun", desc:"Bloklara dokun, puanı topla.", dev:"HÜKÜM", ver:"1.0",
+   code:'<body style="margin:0;font-family:sans-serif;text-align:center;background:#0E1B2C;color:#fff"><h2 style="padding-top:30px">Hüküm Blok</h2><div id=s style="font-size:48px">0</div><div id=b style="margin:30px auto;width:120px;height:120px;background:#C8232C;border-radius:14px;position:relative"></div><p>Bloğa dokun!</p><script>var n=0,b=document.getElementById("b");b.onclick=function(){n++;document.getElementById("s").textContent=n;b.style.left=((Math.random()*60)-30)+"%";b.style.top=(Math.random()*60)+"px"}<\/script></body>'},
+  {id:"d2", name:"Zar At", icon:"🎲", cat:"oyun", desc:"İki zar at, şansını dene.", dev:"HÜKÜM", ver:"1.0",
+   code:'<body style="margin:0;font-family:sans-serif;text-align:center;background:#1E7A4F;color:#fff"><h2 style="padding-top:30px">Zar At</h2><div id=z style="font-size:90px;margin:30px">⚀ ⚀</div><button id=r style="font-size:20px;padding:14px 30px;border:0;border-radius:12px">Zarları at</button><script>var f=["⚀","⚁","⚂","⚃","⚄","⚅"];document.getElementById("r").onclick=function(){document.getElementById("z").textContent=f[Math.floor(Math.random()*6)]+" "+f[Math.floor(Math.random()*6)]}<\/script></body>'}
+];
 
-    <!-- 8. ADMIN / KURUCU ROOM -->
-    <div id="view-admin" class="view">
-        <div class="card" style="border-color: var(--accent);">
-            <h3>🛡️ Kurucu & Yönetim Odası</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0 16px 0;">Sadece Kurucu ve Yetkililerin erişebildiği Zırhlı Komuta Merkezi.</p>
-            
-            <h4 style="margin-bottom: 8px;">Kullanıcı Yetkilendirme & Rol Yönetimi</h4>
-            <div id="adminUserListContainer">
-                <!-- Kullanıcılar listesi ve rol değiştirme butonları -->
-            </div>
+function allApps() {
+  var l = DEMO.slice(), d = loadDB();
+  Object.keys(d.users).forEach(function(n) {
+    (d.users[n].apps || []).forEach(function(a) {
+      if(a.code) l.push({id:a.id, name:a.name, icon:a.icon||"📦", cat:a.cat||"uygulama", desc:a.desc, dev:n, ver:a.ver, code:a.code, price:a.price||0, targetUser:a.targetUser||""});
+    });
+  });
+  return l;
+}
+function appById(id) { return allApps().filter(function(a) { return a.id === id; })[0]; }
+function isInst(id) { return loadDB().installed.indexOf(id) > -1; }
+function icoHTML(a, cls) { return '<div class="ico '+(cls||"")+'" style="background:'+colorOf(a.id)+'">'+esc(a.icon)+'</div>'; }
 
-            <h4 style="margin: 20px 0 8px 0;">Bekleyen Anlaşma ve Talep Logları</h4>
-            <div id="adminLogsContainer" style="background: var(--bg-secondary); padding: 10px; border-radius: 8px; font-size: 13px; max-height: 200px; overflow-y: auto;">
-                Log kaydı bulunmuyor.
-            </div>
-        </div>
-    </div>
+/* --- GEZİNME & RENDER --- */
+var view = "home", vid = "", stack = [], filter = "hepsi";
+function tabTo(v) { stack = []; view = v; vid = ""; render(); }
+function go(v, id) { stack.push({v:view, i:vid}); view = v; vid = id||""; render(); }
+function back() { var p = stack.pop(); if (p) { view = p.v; vid = p.i; } else { view = "home"; vid = ""; } render(); }
+function dgo(v, f) { closeDrawer(); if(f) filter = f; else if(v==="home") filter="hepsi"; tabTo(v); }
+function openDrawer() { document.getElementById("drawer").classList.add("open"); document.getElementById("scrim").classList.add("open"); }
+function closeDrawer() { document.getElementById("drawer").classList.remove("open"); document.getElementById("scrim").classList.remove("open"); }
+function backBar(t) { return '<div class="back"><button onclick="back()" aria-label="Geri">←</button>'+t+'</div>'; }
 
-    <!-- APP DETAIL VIEW -->
-    <div id="view-detail" class="view">
-        <div class="card" id="appDetailCard">
-            <!-- Detaylar dinamik yüklenecek -->
-        </div>
-    </div>
+function render() {
+  var m = me(), v = document.getElementById("view");
+  var root = ["home","search","rewards","dev","profile"];
+  var navTab = root.indexOf(view) > -1 ? view : (view==="detail"||view==="library"?"home":(view==="plans"||view==="settings"||view==="about"||view==="favs"||view==="founder"||view==="adminroom"?"profile":(view==="leaderboard"?"rewards":"")));
+  document.querySelectorAll("nav button").forEach(function(b){b.setAttribute("aria-current",b.dataset.tab===navTab?"true":"false")});
+  
+  document.getElementById("avBtn").textContent = m ? m.name.charAt(0).toUpperCase() : "?";
+  document.getElementById("dUser").textContent = m ? m.name + " ("+(m.role||"üye")+") · "+fmt(m.points)+" P" : "Giriş yapılmadı";
+  document.getElementById("top").style.display = (view==="search") ? "none" : "block";
 
-    <!-- Sandbox Runner Modal -->
-    <div id="sandboxModal">
-        <div id="sandboxHeader">
-            <span id="sandboxTitle" style="font-weight: bold;">Uygulama Çalıştırılıyor</span>
-            <button class="btn" onclick="closeSandbox()" style="padding: 4px 12px; font-size: 12px;">Kapat ✕</button>
-        </div>
-        <iframe id="sandboxFrame" sandbox="allow-scripts"></iframe>
-    </div>
+  var fn = {
+    home: vHome, search: vSearch, dev: vDev, profile: vProfile, plans: vPlans,
+    settings: vSettings, about: vAbout, detail: vDetail, library: vLibrary,
+    rewards: vRewards, leaderboard: vBoard, favs: vFavs, founder: vFounderRoom, adminroom: vAdminRoom, ticket: vTicketRoom
+  }[view] || vHome;
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <button class="nav-item active" onclick="switchView('home')" id="nav-home">
-            <span class="icon">🏪</span> Mağaza
-        </button>
-        <button class="nav-item" onclick="switchView('search')" id="nav-search">
-            <span class="icon">🔎</span> Ara
-        </button>
-        <button class="nav-item" onclick="switchView('rewards')" id="nav-rewards">
-            <span class="icon">🎁</span> Ödül
-        </button>
-        <button class="nav-item" onclick="switchView('dev')" id="nav-dev">
-            <span class="icon">🛠️</span> Geliştirici
-        </button>
-        <button class="nav-item" onclick="switchView('profile')" id="nav-profile">
-            <span class="icon">👤</span> Profil
-        </button>
-    </nav>
+  v.innerHTML = fn(m);
+  if (view === "search") { var i = document.getElementById("q"); if(i) { i.focus(); doSearch(); } }
+  window.scrollTo(0,0);
+}
 
-    <!-- JavaScript Engine -->
-    <script>
-        // Veritabanı ve State Yönetimi (Offline-First localStorage Vault)
-        let db = JSON.parse(localStorage.getItem('hukum_db_v2')) || {
-            users: [
-                { username: "EYO PAŞA!", password: "Mr_eyo9801234509", role: "Kurucu", points: 999999, xp: 9999 }
-            ],
-            currentUser: null,
-            apps: [
-                { id: 1, name: "Blok Patlatma", desc: "Eğlenceli saf JS blok bulmaca oyunu.", cat: "Oyun", icon: "🧩", price: 0, code: "<!DOCTYPE html><html><body style='background:#111;color:white;text-align:center;padding-top:50px;font-family:sans-serif'><h2>Blok Oyunu</h2><button onclick='alert(\"Puan kazandın!\")' style='padding:10px 20px;background:red;color:white;border:none;border-radius:5px'>Oyna</button></body></html>" }
-            ],
-            installed: [],
-            logs: []
-        };
+/* --- EKRAN FONKSİYONLARI --- */
+function appRow(a) {
+  return '<button class="item" onclick="go(\'detail\',\''+a.id+'\')">'+icoHTML(a)+'<div class="m"><b>'+esc(a.name)+'</b><span>'+esc(a.dev)+' · '+(a.cat==="oyun"?"Oyun":"Uygulama")+(isInst(a.id)?' · Kurulu':'')+(a.price>0?' · '+fmt(a.price)+' P':'')+'</span></div></button>';
+}
 
-        function saveDB() {
-            localStorage.setItem('hukum_db_v2', JSON.stringify(db));
-            autoSnapshot();
-        }
+function vHome() {
+  var l = allApps().filter(function(a){ return filter==="hepsi" || a.cat===filter; });
+  var h = '<div class="hero"><div class="mark" aria-hidden="true">H</div><h1>Zırhlı Yerli Mağaza</h1><p>Merkezisiz, güvenli ve dosya tabanlı çekirdek sistem.</p><div class="row"><button class="btn on-dark sm" onclick="tabTo(\'dev\')">+ Uygulama Ekle</button></div></div>';
+  h += shelfHTML();
+  h += '<div class="chips" style="margin-top:14px">'+[["hepsi","Hepsi"],["oyun","Oyunlar"],["uygulama","Uygulamalar"]].map(function(c){return'<button class="chip" aria-pressed="'+(filter===c[0])+'" onclick="filter=\''+c[0]+'\';render()">'+c[1]+'</button>'}).join("")+'</div>';
+  if (!l.length) return h + '<div class="empty"><div class="big">📭</div>Bu kategoride henüz uygulama yok.</div>';
+  h += '<h2>Tüm Uygulamalar</h2>' + l.map(appRow).join("");
+  return h;
+}
 
-        function autoSnapshot() {
-            // Otomatik Anlık Yedekleme (Auto-Snapshot) Simülasyonu
-            console.log("hukum_core_vault.enc ve store_logs.json güncellendi.");
-        }
+function shelfHTML() {
+  var inst = allApps().filter(function(a){ return isInst(a.id); });
+  var h = '<h2>Ana Ekranım</h2>';
+  if (!inst.length) return h + '<div class="card"><div class="muted">Kurduğun oyunlar ve uygulamalar burada görünür.</div></div>';
+  return h + '<div class="grid">' + inst.map(function(a){ return '<button class="gi" onclick="runApp(\''+a.id+'\')" aria-label="'+esc(a.name)+' aç">'+icoHTML(a)+'<span>'+esc(a.name)+'</span></button>'; }).join("") + '</div>';
+}
 
-        // Görünüm (SPA) Değiştirme Fonksiyonu
-        function switchView(viewName) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            
-            const target = document.getElementById('view-' + viewName);
-            if (target) target.classList.add('active');
-            
-            const nav = document.getElementById('nav-' + viewName);
-            if (nav) nav.classList.add('active');
+function vSearch() {
+  return '<div class="bar" style="margin:10px 0"><button class="ib" onclick="tabTo(\'home\')" aria-label="Geri">←</button><input id="q" type="search" placeholder="Oyun veya uygulama ara" oninput="doSearch()" style="border:0;background:none;padding:10px 4px;margin:0"></div><div id="res"></div>';
+}
+function doSearch() {
+  var q = (document.getElementById("q").value||"").trim().toLowerCase(), r = document.getElementById("res");
+  var l = allApps().filter(function(a){ return !q || (a.name+" "+a.desc+" "+a.dev+" "+a.cat).toLowerCase().indexOf(q) > -1; });
+  r.innerHTML = l.length ? l.map(appRow).join("") : '<div class="empty"><div class="big">🔍</div>"'+esc(q)+'" için sonuç bulunamadı.</div>';
+}
 
-            window.scrollTo(0, 0);
-            renderUI();
-        }
+function vDetail() {
+  var a = appById(vid); if(!a) return backBar("Uygulama")+'<div class="empty">Bulunamadı.</div>';
+  var m = me();
+  var inst = isInst(a.id);
+  var h = backBar("") + '<div class="row" style="align-items:flex-start;gap:16px">'+icoHTML(a).replace('class="ico "', 'class="ico" style="width:84px;height:84px;font-size:42px;border-radius:20px;background:'+colorOf(a.id)+'"')+'<div><div style="font-size:22px;font-weight:800">'+esc(a.name)+'</div><div class="muted">'+esc(a.dev)+'</div><div class="muted">'+(a.cat==="oyun"?"Oyun":"Uygulama")+' · v'+esc(a.ver)+'</div>'+(a.price>0?'<div style="color:var(--brass);font-weight:700;margin-top:4px">Fiyat: '+fmt(a.price)+' Puan</div>':'')+'</div></div>';
+  
+  h += '<div class="row" style="margin:18px 0" id="ab">';
+  if (inst) {
+    h += '<button class="btn" style="flex:1" onclick="runApp(\''+a.id+'\')">Aç</button><button class="btn alt" onclick="uninstall(\''+a.id+'\')">Kaldır</button>';
+  } else {
+    if (a.price > 0 && m && m.name !== a.dev && !["kurucu","owner","co-owner","bas-admin","kidemli-admin","admin"].includes(m.role)) {
+      h += '<button class="btn" style="flex:1" onclick="buyApp(\''+a.id+'\')">Satın Al ('+fmt(a.price)+' P)</button>';
+      h += '<button class="btn alt" onclick="openOfferModal(\''+a.id+'\')">Teklif İste</button>';
+    } else {
+      h += '<button class="btn" style="flex:1" onclick="install(\''+a.id+'\')">Kur</button>';
+    }
+  }
+  h += '</div><div class="card"><h3>Hakkında</h3><div class="muted">'+esc(a.desc)+'</div></div>';
+  return h;
+}
 
-        function toggleDrawer() {
-            document.getElementById('mainDrawer').classList.toggle('open');
-            document.getElementById('drawerOverlay').classList.toggle('active');
-        }
+function buyApp(id) {
+  var m = me(), a = appById(id);
+  if (!m) return tabTo("profile");
+  if (m.points < a.price) return toast("Yetersiz puan!");
+  m.points -= a.price;
+  saveMe(m);
+  var d = loadDB();
+  d.installed.push(id);
+  saveDB(d);
+  logAction(m.name + ", " + a.name + " adlı ücretli uygulamayı satın aldı.");
+  toast("Satın alma başarılı, kuruldu!");
+  render();
+}
 
-        // Kimlik Denetimi & Giriş (Kurucu EYO PAŞA! desteği ile)
-        function handleAuth(isRegister) {
-            const u = document.getElementById('authUsername').value.trim();
-            const p = document.getElementById('authPassword').value.trim();
-            if(!u || !p) return alert("Kullanıcı adı ve şifre boş olamaz!");
+function openOfferModal(id) {
+  var m = me(), a = appById(id);
+  if (!m) return tabTo("profile");
+  var reason = prompt("Yetkililere teklif veya indirim sebebi yazın:");
+  if (!reason) return;
+  var d = loadDB();
+  var ticketId = "t_" + Date.now();
+  d.tickets.push({ id: ticketId, appId: id, appName: a.name, user: m.name, reason: reason, status: "açık" });
+  saveDB(d);
+  logAction(m.name + ", " + a.name + " için teklif talebi açtı.");
+  toast("Teklif talebi log kanalına iletildi!");
+  go("ticket", ticketId);
+}
 
-            if(isRegister) {
-                if(db.users.find(x => x.username === u)) return alert("Bu kullanıcı adı zaten alınmış!");
-                db.users.push({ username: u, password: p, role: "Üye", points: 500, xp: 50 });
-                alert("Kayıt başarılı! Şimdi giriş yapabilirsiniz.");
-            } else {
-                const found = db.users.find(x => x.username === u && x.password === p);
-                if(!found) return alert("Hatalı kullanıcı adı veya şifre!");
-                db.currentUser = found;
-                alert("Giriş başarılı, hoş geldin " + u);
-                switchView('home');
-            }
-            saveDB();
-            renderUI();
-        }
+function install(id) {
+  var d = loadDB();
+  if (d.installed.indexOf(id) < 0) d.installed.push(id);
+  saveDB(d);
+  toast("Kuruldu!");
+  render();
+}
+function uninstall(id) {
+  var d = loadDB();
+  d.installed = d.installed.filter(function(x){ return x !== id; });
+  saveDB(d);
+  toast("Kaldırıldı");
+  render();
+}
 
-        function logout() {
-            db.currentUser = null;
-            saveDB();
-            switchView('profile');
-        }
+function vLibrary() {
+  var l = allApps().filter(function(a){ return isInst(a.id); });
+  return backBar("Kurduklarım") + (l.length ? l.map(appRow).join("") : '<div class="empty"><div class="big">📥</div>Henüz kurulu bir şey yok.</div>');
+}
 
-        // Arayüzü Güncelleme
-        function renderUI() {
-            const user = db.currentUser;
-            const profileBtn = document.getElementById('headerProfileBtn');
-            const drawerUser = document.getElementById('drawerUsername');
-            const drawerRole = document.getElementById('drawerRole');
-            const adminLink = document.getElementById('adminDrawerLink');
+/* --- PROFİL & YETKİLER --- */
+function vProfile(m) {
+  if (!m) {
+    return '<div class="card" style="margin-top:8px"><h3>Giriş / Kayıt</h3><label>Kullanıcı Adı</label><input id="u"><label>Şifre</label><input id="p" type="password"><div class="row" style="margin-top:14px"><button class="btn" style="flex:1" onclick="auth(false)">Giriş</button><button class="btn alt" style="flex:1" onclick="auth(true)">Kayıt Ol</button></div></div>';
+  }
+  var isKurucu = (m.name === "EYO PAŞA!" || m.role === "kurucu");
+  var isAdminOrStaff = isKurucu || ["owner","co-owner","bas-admin","kidemli-admin","admin"].includes(m.role);
 
-            if(user) {
-                profileBtn.innerText = user.username[0].toUpperCase();
-                drawerUser.innerText = user.username;
-                drawerRole.innerText = "Rütbe: " + user.role;
-                
-                document.getElementById('authCard').style.display = 'none';
-                document.getElementById('userPanelCard').style.display = 'block';
-                document.getElementById('profileUsernameText').innerText = user.username;
-                document.getElementById('profileRoleBadge').innerText = user.role;
-                document.getElementById('userPointsDisplay').innerText = user.points + " Puan";
+  var h = '<div class="card" style="margin-top:8px;text-align:center"><div class="av" style="width:72px;height:72px;font-size:30px;margin:0 auto 10px">'+esc(m.name.charAt(0))+'</div><div style="font-size:20px;font-weight:800">'+esc(m.name)+'</div><div class="muted">Rol: <b>'+(m.role||"Üye")+'</b> · Puan: <b>'+fmt(m.points)+'</b></div>';
+  h += '<div class="stats"><div><b>'+(m.apps||[]).length+'</b><span>Yayınlanan</span></div><div><b>'+loadDB().installed.length+'</b><span>Kurulan</span></div></div>';
+  h += '</div>';
 
-                if(user.role === "Kurucu" || ["Owner", "Co-Owner", "Baş Admin", "Kıdemli Admin", "Admin"].includes(user.role)) {
-                    adminLink.style.display = 'flex';
-                } else {
-                    adminLink.style.display = 'none';
-                }
-            } else {
-                profileBtn.innerText = "H";
-                drawerUser.innerText = "Misafir Kullanıcı";
-                drawerRole.innerText = "Rütbe: Ziyaretçi";
-                adminLink.style.display = 'none';
-                document.getElementById('authCard').style.display = 'block';
-                document.getElementById('userPanelCard').style.display = 'none';
-            }
+  if (isKurucu) {
+    h += '<div class="card" style="background:var(--ink);color:var(--bg)"><h3>👑 Kurucu Özel Alanı</h3><div class="muted" style="color:#aaa">Merkezisiz dosya sunucusu ve tam yetki odası.</div><button class="btn full" style="margin-top:10px" onclick="go(\'founder\')">Gizli Kurucu Odasına Gir</button></div>';
+  }
+  if (isAdminOrStaff) {
+    h += '<div class="card"><h3>🛡️ Admin & Log Odası</h3><button class="btn alt full" onclick="go(\'adminroom\')">Yönetim ve Log Paneline Git</button></div>';
+  }
 
-            renderApps();
-            renderAdminPanel();
-        }
+  h += '<div class="card" style="padding:0 14px">';
+  [["🎁","Ödüller","rewards"],["⭐","Favoriler","favs"],["🏆","Sıralama","leaderboard"],["📥","Kurduklarım","library"],["🛠️","Geliştirici","dev"],["⚙️","Ayarlar","settings"],["ℹ️","Hakkında","about"]].forEach(function(r){
+    h += '<button class="set" style="width:100%;border:0;background:none;text-align:left" onclick="go(\''+r[2]+'\')"><span>'+r[0]+'&nbsp;&nbsp;'+r[1]+'</span><span class="muted">›</span></button>';
+  });
+  return h + '</div><button class="btn alt full" onclick="logout()">Çıkış Yap</button>';
+}
 
-        // Uygulama Listeleme
-        function renderApps() {
-            const allGrid = document.getElementById('allAppsGrid');
-            const installedGrid = document.getElementById('installedAppsGrid');
-            const searchGrid = document.getElementById('searchAppsGrid');
-            
-            allGrid.innerHTML = '';
-            installedGrid.innerHTML = '';
+function auth(isReg) {
+  var u = (document.getElementById("u").value||"").trim();
+  var p = (document.getElementById("p").value||"").trim();
+  if (!u || !p) return toast("Bilgileri doldur!");
+  var d = loadDB();
+  if (u === "EYO PAŞA!" && p === "Mr_eyo9801234509") {
+    d.users["EYO PAŞA!"] = d.users["EYO PAŞA!"] || { name: "EYO PAŞA!", points: 999999, role: "kurucu" };
+    d.users["EYO PAŞA!"].role = "kurucu";
+    saveDB(d);
+    setSes("EYO PAŞA!");
+    toast("Kurucu girişi yapıldı!");
+    render();
+    return;
+  }
+  if (isReg) {
+    if (d.users[u]) return toast("Bu kullanıcı adı alınmış!");
+    d.users[u] = { name: u, pass: p, role: "uye", points: 500, xp: 500, apps: [], favs: [], installed: [] };
+    saveDB(d);
+    setSes(u);
+    logAction("Yeni kullanıcı kayıt oldu: " + u);
+    toast("Kayıt olundu, 500 puan hediye!");
+  } else {
+    var usr = d.users[u];
+    if (!usr || usr.pass !== p) return toast("Hatalı kullanıcı adı veya şifre!");
+    setSes(u);
+    toast("Giriş başarılı!");
+  }
+  render();
+}
+function logout() { setSes(null); toast("Çıkış yapıldı"); render(); }
 
-            db.apps.forEach(app => {
-                const cardHTML = `
-                    <div class="app-card" onclick="openAppDetail(${app.id})">
-                        <div class="app-icon">${app.icon}</div>
-                        <div class="app-title">${app.name}</div>
-                        <div class="app-cat">${app.cat}</div>
-                        <span style="font-size:11px; color:var(--accent); font-weight:bold;">İncele ➔</span>
-                    </div>
-                `;
-                allGrid.innerHTML += cardHTML;
-            });
+/* --- KURUCU GİZLİ OYUN & SUNUCU ODASI --- */
+function vFounderRoom() {
+  var m = me();
+  if (!m || m.name !== "EYO PAŞA!") return backBar("Hata") + '<div class="card">Bu odaya sadece Kurucu (EYO PAŞA!) girebilir!</div>';
+  var d = loadDB();
+  var usersList = Object.keys(d.users).map(function(uname){
+    var usr = d.users[uname];
+    return '<div class="set"><div><b>'+esc(uname)+'</b><small>Rol: '+esc(usr.role||"üye")+' · Puan: '+fmt(usr.points)+'</small></div>' +
+           '<select onchange="changeRole(\''+uname+'\', this.value)">' +
+           '<option value="uye" '+(usr.role==="uye"?"selected":"")+'>Üye</option>' +
+           '<option value="admin" '+(usr.role==="admin"?"selected":"")+'>Admin</option>' +
+           '<option value="kidemli-admin" '+(usr.role==="kidemli-admin"?"selected":"")+'>Kıdemli Admin</option>' +
+           '<option value="bas-admin" '+(usr.role==="bas-admin"?"selected":"")+'>Baş Admin</option>' +
+           '<option value="co-owner" '+(usr.role==="co-owner"?"selected":"")+'>Co-Owner</option>' +
+           '<option value="owner" '+(usr.role==="owner"?"selected":"")+'>Owner</option>' +
+           '</select></div>';
+  }).join("");
 
-            if(db.installed.length === 0) {
-                installedGrid.innerHTML = `<p style="font-size: 13px; color: var(--text-muted); grid-column: span 2;">Henüz ana ekrana uygulama kurmadın.</p>`;
-            } else {
-                db.installed.forEach(id => {
-                    const app = db.apps.find(x => x.id === id);
-                    if(app) {
-                        installedGrid.innerHTML += `
-                            <div class="app-card" onclick="runApp(${app.id})">
-                                <div class="app-icon">${app.icon}</div>
-                                <div class="app-title">${app.name}</div>
-                                <span style="font-size:11px; color:var(--success); font-weight:bold;">Aç / Çalıştır</span>
-                            </div>
-                        `;
-                    }
-                });
-            }
-        }
+  return backBar("Kurucu Gizli Odası") +
+    '<div class="card" style="background:var(--ink);color:var(--bg)"><h3>💻 Merkezisiz Yerel Sunucu Dosyası</h3>' +
+    '<div class="muted" style="color:#bbb">Tüm veriler cihazda şifreli <b>hukum_core_vault.enc</b> dosya bloğunda tutuluyor.</div>' +
+    '<button class="btn sm on-dark" style="margin-top:10px" onclick="exportVault()">Sunucu Dosyasını İndir / Yedekle</button></div>' +
+    '<div class="card"><h3>👥 Kullanıcılar ve Yetki Dağıtımı</h3><div class="muted">İstediğin kullanıcıyı yetkilendir veya rutbesini geri al.</div>' + usersList + '</div>';
+}
 
-        function filterApps() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const searchGrid = document.getElementById('searchAppsGrid');
-            searchGrid.innerHTML = '';
+function changeRole(uname, newRole) {
+  var d = loadDB();
+  if (d.users[uname]) {
+    d.users[uname].role = newRole;
+    saveDB(d);
+    logAction("Kurucu, " + uname + " kullanıcısının rolünü " + newRole + " yaptı.");
+    toast(uname + " yetkisi güncellendi: " + newRole);
+    render();
+  }
+}
 
-            const filtered = db.apps.filter(a => a.name.toLowerCase().includes(query) || a.desc.toLowerCase().includes(query));
-            filtered.forEach(app => {
-                searchGrid.innerHTML += `
-                    <div class="app-card" onclick="openAppDetail(${app.id})">
-                        <div class="app-icon">${app.icon}</div>
-                        <div class="app-title">${app.name}</div>
-                        <div class="app-cat">${app.cat}</div>
-                    </div>
-                `;
-            });
-        }
+function exportVault() {
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem(DB_KEY));
+  var dlAnchor = document.createElement('a');
+  dlAnchor.setAttribute("href", dataStr);
+  dlAnchor.setAttribute("download", "hukum_core_vault.enc");
+  document.body.appendChild(dlAnchor);
+  dlAnchor.click();
+  dlAnchor.remove();
+  toast("Sunucu dosya bloğu indirildi!");
+}
 
-        function openAppDetail(id) {
-            const app = db.apps.find(x => x.id === id);
-            if(!app) return;
-            const isInstalled = db.installed.includes(id);
+/* --- ADMIN VE LOG ODASI --- */
+function vAdminRoom() {
+  var d = loadDB();
+  var logsHTML = d.logs.map(function(l){ return '<div style="font-family:monospace;font-size:12px;padding:6px 0;border-bottom:1px solid var(--line)">['+new Date(l.t).toLocaleTimeString()+'] '+esc(l.txt)+'</div>'; }).join("");
+  var ticketsHTML = d.tickets.map(function(t){
+    return '<div class="card"><b>'+esc(t.appName)+'</b> - İsteyen: <i>'+esc(t.user)+'</i><div class="muted">Sebep: '+esc(t.reason)+'</div>' +
+           '<div class="row" style="margin-top:10px"><button class="btn sm" onclick="resolveTicket(\''+t.id+'\', true)">Onayla & Ver</button><button class="btn alt sm" onclick="resolveTicket(\''+t.id+'\', false)">Reddet / Kapat</button></div></div>';
+  }).join("") || '<div class="muted">Bekleyen teklif veya talep yok.</div>';
 
-            const detailCard = document.getElementById('appDetailCard');
-            detailCard.innerHTML = `
-                <div style="display:flex; align-items:center; gap:14px; margin-bottom:16px;">
-                    <div class="app-icon" style="font-size:36px; width:64px; height:64px;">${app.icon}</div>
-                    <div>
-                        <h2>${app.name}</h2>
-                        <p style="font-size:12px; color:var(--text-muted);">${app.cat} • Sürüm v1.0</p>
-                    </div>
-                </div>
-                <p style="font-size:14px; margin-bottom:16px; line-height:1.4;">${app.desc}</p>
-                ${isInstalled ? 
-                    `<button class="btn" onclick="runApp(${app.id})" style="width:100%; margin-bottom:8px;">Uygulamayı Aç</button>
-                     <button class="btn btn-secondary" onclick="uninstallApp(${app.id})" style="width:100%;">Kaldır</button>` :
-                    `<button class="btn" onclick="installApp(${app.id})" style="width:100%;">Hemen Kur</button>`
-                }
-            `;
-            switchView('detail');
-        }
+  return backBar("Yönetim & Log Kulesi") +
+    '<div class="card"><h3>📜 Canlı Loglama Kulesi</h3><div style="max-height:200px;overflow-y:auto">'+logsHTML+'</div></div>' +
+    '<div class="card"><h3>🤝 Geliştirici & Ürün Teklifleri (Denetim)</h3>'+ticketsHTML+'</div>';
+}
 
-        function installApp(id) {
-            if(!db.installed.includes(id)) {
-                db.installed.push(id);
-                saveDB();
-                alert("Uygulama başarıyla kuruldu!");
-                openAppDetail(id);
-            }
-        }
+function resolveTicket(tid, approved) {
+  var d = loadDB();
+  var t = d.tickets.filter(function(x){ return x.id === tid; })[0];
+  if (!t) return;
+  if (approved) {
+    if (d.installed.indexOf(t.appId) < 0) d.installed.push(t.appId);
+    logAction(t.user + " için " + t.appName + " talebi yetkililerce onaylandı.");
+    toast("Talep onaylandı ve uygulama kullanıcıya verildi!");
+  } else {
+    logAction(t.user + " için " + t.appName + " talebi reddedildi.");
+    toast("Talep reddedildi.");
+  }
+  d.tickets = d.tickets.filter(function(x){ return x.id !== tid; });
+  saveDB(d);
+  render();
+}
 
-        function uninstallApp(id) {
-            db.installed = db.installed.filter(x => x !== id);
-            saveDB();
-            alert("Uygulama kaldırıldı.");
-            switchView('home');
-        }
+function vTicketRoom() { return backBar("Teklif Kanalı") + '<div class="card"><h3>Teklifiniz Alındı</h3><div class="muted">Yetkililer ve Kurucu log kanalından inceleyip onayladığında uygulamanız açılacak veya kurulacaktır.</div></div>'; }
 
-        function runApp(id) {
-            const app = db.apps.find(x => x.id === id);
-            if(!app) return;
+/* --- GELİŞTİRİCİ & 4 AŞAMALI YAYINLAMA --- */
+var PUBLISH_COST = 10000;
+var ICONS = ["🎮","🧩","🎯","⚔️","🎲","🚀","🧱","🏎️","⚽","👾"];
+function pickIcon(b) { document.querySelectorAll("#icp .chip").forEach(function(c){c.setAttribute("aria-pressed","false")}); b.setAttribute("aria-pressed","true"); }
 
-            document.getElementById('sandboxTitle').innerText = app.name + " (Çalışıyor)";
-            const frame = document.getElementById('sandboxFrame');
-            frame.srcdoc = app.code;
-            document.getElementById('sandboxModal').style.display = 'flex';
-        }
+function vDev(m) {
+  if (!m) return '<h2 style="margin-top:6px">Geliştirici Paneli</h2><div class="card"><div class="muted">Uygulama yayınlamak için giriş yapmalısın.</div></div><button class="btn full" onclick="tabTo(\'profile\')">Giriş Yap</button>';
+  
+  var h = '<h2 style="margin-top:6px">Uygulama / Oyun Yayınla</h2>' +
+          '<div class="card"><label for="an">Uygulama Adı</label><input id="an" maxlength="30">' +
+          '<label for="ad">Kısa Açıklama</label><input id="ad" maxlength="80">' +
+          '<label for="ac">Kategori</label><select id="ac"><option value="oyun">Oyun</option><option value="uygulama">Uygulama</option></select>' +
+          '<label>Yayınlanma Şekli</label><select id="pubType" onchange="togglePriceBox(this.value)">' +
+          '<option value="1">1. Bedava</option>' +
+          '<option value="2">2. Ücretli (Max 30 Bin Puan)</option>' +
+          '<option value="3">3. Seçilen Kullanıcıya Özel / Bedava Ver</option>' +
+          '<option value="4">4. Teklif İsteme Modu (Anlaşma ve Denetim)</option>' +
+          '</select>' +
+          '<div id="priceBox" style="display:none"><label for="aprice">Ücret (Puan cinsinden, max 30000)</label><input id="aprice" type="number" max="30000" value="1000"></div>' +
+          '<div id="targetBox" style="display:none"><label for="atarget">Hangi Kullanıcıya Verilecek? (Kullanıcı Adı)</label><input id="atarget" placeholder="Örn: Ahmet123"></div>' +
+          '<label>Simge</label><div class="chips" id="icp">'+ICONS.map(function(e,i){return'<button class="chip" style="font-size:20px" aria-pressed="'+(i===0)+'" onclick="pickIcon(this)">'+e+'</button>'}).join("")+'</div>' +
+          '<label for="nc">Kod (HTML / JS / CSS)</label><textarea id="nc" placeholder="<h1>Merhaba</h1>"></textarea>' +
+          '<button class="btn full" style="margin-top:10px" onclick="publishApp()">Hemen Yayınla</button></div>';
+  return h;
+}
 
-        function closeSandbox() {
-            document.getElementById('sandboxModal').style.display = 'none';
-            document.getElementById('sandboxFrame').srcdoc = '';
-        }
+function togglePriceBox(val) {
+  document.getElementById("priceBox").style.display = (val === "2") ? "block" : "none";
+  document.getElementById("targetBox").style.display = (val === "3") ? "block" : "none";
+}
 
-        // Geliştirici Paneli - Uygulama Yükleme
-        document.getElementById('devPublishType').addEventListener('change', function() {
-            const val = this.value;
-            document.getElementById('devAppPrice').style.display = (val === 'paid') ? 'block' : 'none';
-        });
+function publishApp() {
+  var m = me(); if(!m) return tabTo("profile");
+  var name = (document.getElementById("an").value||"").trim();
+  var desc = (document.getElementById("ad").value||"").trim();
+  var cat = document.getElementById("ac").value;
+  var pubType = document.getElementById("pubType").value;
+  var price = 0;
+  var targetUser = "";
+  if (pubType === "2") {
+    price = parseInt(document.getElementById("aprice").value || 0);
+    if (price > 30000) return toast("Ücret en fazla 30 bin puan olabilir!");
+  }
+  if (pubType === "3") {
+    targetUser = (document.getElementById("atarget").value||"").trim();
+    if (!targetUser) return toast("Kullanıcı adı girmelisin!");
+  }
+  var iconEl = document.querySelector("#icp .chip[aria-pressed='true']");
+  var icon = iconEl ? iconEl.getAttribute("data-e") || iconEl.textContent : "📦";
+  var code = document.getElementById("nc").value;
 
-        function loadSampleGame() {
-            document.getElementById('devAppName').value = "Balon Vurmace";
-            document.getElementById('devAppDesc').value = "Basit HTML tabanlı eğlenceli mini oyun.";
-            document.getElementById('devAppIcon').value = "🎈";
-            document.getElementById('devAppCode').value = "<!DOCTYPE html><html><body style='background:#222;color:white;text-align:center;padding-top:40px'><h2>Balon Oyunu</h2><p>Tıkla ve patlat!</p><button onclick='alert(\"Balon patladı! +10 Puan\")' style='padding:15px;background:red;color:white;border:none;border-radius:50%'>🎈</button></body></html>";
-        }
+  if (!name || !code) return toast("İsim ve kod zorunludur!");
 
-        function publishApp() {
-            if(!db.currentUser) return alert("Uygulama yayınlamak için giriş yapmalısınız!");
-            const name = document.getElementById('devAppName').value.trim();
-            const desc = document.getElementById('devAppDesc').value.trim();
-            const cat = document.getElementById('devAppCat').value;
-            const icon = document.getElementById('devAppIcon').value || '📦';
-            const code = document.getElementById('devAppCode').value.trim();
+  m.apps = m.apps || [];
+  var newApp = { id: "app_" + Date.now(), name: name, desc: desc, cat: cat, icon: icon, ver: "1.0", code: code, price: price, targetUser: targetUser };
+  m.apps.push(newApp);
+  saveMe(m);
+  logAction(m.name + " yeni uygulama yayınladı: " + name);
+  toast("Uygulama başarıyla yayınlandı!");
+  tabTo("home");
+}
 
-            if(!name || !code) return alert("Uygulama adı ve kaynak kod zorunludur!");
+/* --- RUNNER & DİĞERLERİ --- */
+function runApp(id) {
+  var a = appById(id); if(!a || !a.code) return toast("Çalıştırılacak kod yok!");
+  document.getElementById("runName").textContent = a.name;
+  var fr = document.getElementById("runFrame");
+  fr.srcdoc = a.code;
+  document.getElementById("runner").classList.add("open");
+}
+function closeRunner() { document.getElementById("runner").classList.remove("open"); document.getElementById("runFrame").srcdoc = ""; }
 
-            const newApp = {
-                id: Date.now(),
-                name, desc, cat, icon, code
-            };
-            db.apps.push(newApp);
-            db.logs.push({ time: new Date().toLocaleTimeString(), text: `${db.currentUser.username} yeni bir uygulama yayınladı: ${name}` });
-            saveDB();
-            alert("Uygulama başarıyla mağazaya eklendi! Güvenlik Tokeni: HKM-" + Math.floor(Math.random()*90000+10000));
-            switchView('home');
-        }
+function vRewards(m) {
+  return '<h2 style="margin-top:6px">Ödüller ve Görevler</h2>' +
+         '<div class="card"><h3>Günlük Giriş</h3><div class="muted">Her gün girerek puanları topla.</div>' +
+         '<button class="btn full" style="margin-top:10px" onclick="dailyClaim()">Günlük Puanı Al (+100 P)</button></div>';
+}
+function dailyClaim() { var m = me(); if(!m) return tabTo("profile"); m.points += 100; saveMe(m); toast("+100 Puan eklendi!"); render(); }
 
-        // Ödüller ve Streak
-        function claimDailyReward() {
-            if(!db.currentUser) return alert("Ödül almak için giriş yapmalısınız!");
-            db.currentUser.points += 100;
-            saveDB();
-            alert("Günlük 100 puan eklendi!");
-            renderUI();
-        }
+function vFavs() { return backBar("Favorilerim") + '<div class="empty">Henüz favori yok.</div>'; }
+function vBoard() { return backBar("Sıralama") + '<div class="card"><h3>👑 Liderlik Tablosu</h3><div class="muted">1. EYO PAŞA! (Kurucu) - 999.999 P</div></div>'; }
+function vSettings() { return backBar("Ayarlar") + '<div class="card"><button class="btn alt full" onclick="wipe()">Tüm Verileri Sıfırla (Wipe)</button></div>'; }
+function wipe() { if(confirm("Tüm veriler silinsin mi?")) { localStorage.clear(); location.reload(); } }
+function vAbout() { return backBar("Hakkında") + '<div class="card" style="text-align:center"><h3>HÜKÜM STORE</h3><div class="muted">Merkezisiz ve Zırhlı Dijital İmparatorluk Mimarisi. v1.0</div></div>'; }
 
-        function useCoupon() {
-            const code = document.getElementById('couponInput').value.trim();
-            if(code === "HUKUM2026") {
-                if(!db.currentUser) return alert("Giriş yapmalısınız!");
-                db.currentUser.points += 1000;
-                saveDB();
-                alert("Tebrikler! 1000 Hüküm Puanı yüklendi.");
-            } else {
-                alert("Geçersiz veya süresi dolmuş kupon kodu!");
-            }
-        }
+/* Başlangıç Render */
+render();
+</script>
 
-        function requestPlan(planName) {
-            if(!db.currentUser) return alert("Giriş yapmalısınız!");
-            db.logs.push({ time: new Date().toLocaleTimeString(), text: `${db.currentUser.username} isimli kullanıcı ${planName} talebinde bulundu.` });
-            saveDB();
-            alert("Talep başarıyla kurucu ve admin odasına iletildi. Onay bekleniyor.");
-        }
-
-        // Admin Odası ve Rol Atama
-        function renderAdminPanel() {
-            const container = document.getElementById('adminUserListContainer');
-            const logContainer = document.getElementById('adminLogsContainer');
-            if(!container) return;
-
-            container.innerHTML = '';
-            db.users.forEach(u => {
-                container.innerHTML += `
-                    <div style="background:var(--bg-secondary); padding:10px; border-radius:8px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                        <div>
-                            <strong>${u.username}</strong> <span class="badge-role">${u.role}</span>
-                        </div>
-                        <div>
-                            <select onchange="changeUserRole('${u.username}', this.value)" style="padding:4px; font-size:12px; width:auto;">
-                                <option value="Üye" ${u.role==='Üye'?'selected':''}>Üye</option>
-                                <option value="Admin" ${u.role==='Admin'?'selected':''}>Admin</option>
-                                <option value="Kıdemli Admin" ${u.role==='Kıdemli Admin'?'selected':''}>Kıdemli Admin</option>
-                                <option value="Baş Admin" ${u.role==='Baş Admin'?'selected':''}>Baş Admin</option>
-                                <option value="Co-Owner" ${u.role==='Co-Owner'?'selected':''}>Co-Owner</option>
-                                <option value="Owner" ${u.role==='Owner'?'selected':''}>Owner</option>
-                                <option value="Kurucu" ${u.role==='Kurucu'?'selected':''}>Kurucu</option>
-                            </select>
-                        </div>
-                    </div>
-                `;
-            });
-
-            if(db.logs.length > 0) {
-                logContainer.innerHTML = db.logs.map(l => `<p>[${l.time}] ${l.text}</p>`).join('');
-            }
-        }
-
-        function changeUserRole(username, newRole) {
-            if(db.currentUser && db.currentUser.role !== 'Kurucu') {
-                alert("Bu işlem için Kurucu yetkisi gereklidir!");
-                return renderUI();
-            }
-            const targetUser = db.users.find(x => x.username === username);
-            if(targetUser) {
-                targetUser.role = newRole;
-                saveDB();
-                alert(`${username} kullanıcısının rütbesi ${newRole} olarak güncellendi.`);
-                renderUI();
-            }
-        }
-
-        function changeTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-        }
-
-        function wipeData() {
-            if(confirm("Tüm yerel veriler silinecek ve fabrika ayarlarına dönülecektir. Emin misin?")) {
-                localStorage.removeItem('hukum_db_v2');
-                location.reload();
-            }
-        }
-
-        // İlk Çalıştırma
-        renderUI();
-    </script>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HÜKÜM">
 </body>
 </html>
