@@ -3,57 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>HÜKÜM STORE: Zırhlı Dijital İmparatorluk</title>
+<title>HÜKÜM STORE</title>
 <style>
 :root{
   --bg:#F1F3F6; --card:#FFFFFF; --ink:#0E1B2C; --mute:#5E6E80; --line:#DDE2E8;
   --red:#C8232C; --on-red:#FFFFFF; --brass:#B8892B; --ok:#1E7A4F; --chip:#E4E8ED;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px);
-  padding-bottom:env(safe-area-inset-bottom,0px);
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){--bg:#0A1320;--card:#13233A;--ink:#EDF1F5;--mute:#98A8BA;--line:#25374F;--red:#E5444C;--brass:#D9A93F;--ok:#4CC38A;--chip:#1B2E48}
 }
 :root[data-theme="dark"]{--bg:#0A1320;--card:#13233A;--ink:#EDF1F5;--mute:#98A8BA;--line:#25374F;--red:#E5444C;--brass:#D9A93F;--ok:#4CC38A;--chip:#1B2E48}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.4;padding-bottom:72px}
 button,input,textarea,select{font:inherit;color:inherit}
 button{cursor:pointer}
-:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
 .wrap{max-width:560px;margin:0 auto}
-
-/* üst çubuk */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);padding:10px 12px 8px}
 .bar{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:4px 6px;min-height:50px}
 .ib{border:0;background:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;flex:none}
 .ib:active{background:var(--chip)}
 .sbtn{flex:1;text-align:left;border:0;background:none;color:var(--mute);font-size:15px;padding:10px 4px}
-.av{width:34px;height:34px;border-radius:50%;background:var(--red);color:var(--on-red);font-weight:800;display:grid;place-items:center;border:0;flex:none;margin-right:3px}
+.av{width:34px;height:34px;border-radius:50%;background:var(--red);color:var(--on-red);font-weight:800;display:grid;place-items:center;border:0;flex:none}
 .page{padding:6px 14px 20px}
 .back{display:flex;align-items:center;gap:6px;padding:4px 0 10px;font-weight:700;font-size:18px}
 .back button{border:0;background:none;font-size:22px;width:36px;height:36px;border-radius:50%}
-
-/* kartlar */
-h2{font-size:18px;margin:20px 0 10px;letter-spacing:-.2px}
+h2{font-size:18px;margin:20px 0 10px}
 .hero{border-radius:16px;padding:18px;background:var(--ink);color:var(--bg);position:relative;overflow:hidden}
-.hero h1{margin:0 0 6px;font-size:21px;letter-spacing:-.5px;line-height:1.2;max-width:85%}
+.hero h1{margin:0 0 6px;font-size:21px;max-width:85%}
 .hero p{margin:0 0 14px;font-size:14px;opacity:.85;max-width:85%}
-.hero .mark{position:absolute;right:-18px;top:-18px;width:110px;height:110px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-size:48px;font-weight:900;color:var(--on-red);opacity:.95;padding:30px 0 0 0}
 .btn{border:0;border-radius:12px;padding:12px 18px;font-weight:700;background:var(--red);color:var(--on-red);min-height:46px}
 .btn.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
 .btn.sm{padding:8px 16px;min-height:38px;font-size:14px;border-radius:20px}
 .btn.full{width:100%}
-.btn.on-dark{background:var(--bg);color:var(--ink)}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 2px;scrollbar-width:none}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 2px}
 .chip{border:0;background:var(--chip);padding:8px 16px;border-radius:20px;font-weight:600;font-size:14px;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.hs{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
-.tile{flex:0 0 108px;text-align:left;border:0;background:none;padding:0}
-.tile .ico{width:108px;height:108px;font-size:48px;border-radius:24px}
-.tile b{display:block;font-size:14px;margin-top:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tile span{font-size:12px;color:var(--mute)}
 .ico{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;font-size:30px;flex:none;color:#fff}
 .item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left}
 .item .m{flex:1;min-width:0}
@@ -66,9 +51,8 @@ h2{font-size:18px;margin:20px 0 10px;letter-spacing:-.2px}
 .stats div{flex:1}
 .stats b{display:block;font-size:20px}
 .stats span{font-size:12px;color:var(--mute)}
-.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--chip);color:var(--mute);vertical-align:middle;margin-left:6px}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--chip);color:var(--mute);margin-left:6px}
 .badge.red{background:var(--red);color:var(--on-red)}
-.badge.brass{background:var(--brass);color:#fff}
 label{display:block;font-size:13px;color:var(--mute);margin:10px 0 4px}
 input,textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
 textarea{min-height:170px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
@@ -81,31 +65,21 @@ textarea{min-height:170px;font-family:ui-monospace,Menlo,Consolas,monospace;font
 .empty .big{font-size:42px}
 details{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
 summary{font-weight:600;padding:8px 0}
-
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px}
-.gi{border:0;background:none;padding:0;text-align:center;min-width:0}
-.gi .ico{width:100%;height:auto;aspect-ratio:1;max-width:72px;margin:0 auto;font-size:34px;border-radius:18px}
-.gi span{display:block;font-size:12px;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* alt menü */
 nav{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--card);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px)}
 nav button{flex:1;border:0;background:none;padding:8px 0 7px;font-size:11px;color:var(--mute);font-weight:600;min-height:56px}
-nav button i{display:block;font-style:normal;font-size:20px;line-height:1.2}
+nav button i{display:block;font-style:normal;font-size:20px}
 nav button[aria-current="true"]{color:var(--red)}
-
-/* yan menü */
 .scrim{position:fixed;inset:0;background:rgba(5,10,18,.55);z-index:30;display:none}
 .scrim.open{display:block}
 .drawer{position:fixed;top:0;bottom:0;left:0;width:min(82vw,320px);background:var(--card);z-index:31;transform:translateX(-102%);transition:transform .2s;padding-top:env(safe-area-inset-top,0px);overflow-y:auto}
 .drawer.open{transform:none}
 .dh{padding:20px 18px;background:var(--ink);color:var(--bg)}
-.dh .seal{width:52px;height:52px;border-radius:50%;background:var(--red);color:var(--on-red);display:grid;place-items:center;font-weight:900;font-size:24px;box-shadow:inset 0 0 0 3px var(--red),inset 0 0 0 5px rgba(255,255,255,.55);margin-bottom:10px}
-.dh b{font-size:18px;letter-spacing:-.4px}
+.dh .seal{width:52px;height:52px;border-radius:50%;background:var(--red);color:var(--on-red);display:grid;place-items:center;font-weight:900;font-size:24px;margin-bottom:10px}
+.dh b{font-size:18px}
 .dh div{font-size:13px;opacity:.8}
 .dl button{display:flex;align-items:center;gap:16px;width:100%;border:0;background:none;padding:14px 20px;font-size:15px;font-weight:600;text-align:left}
 .dl button:active{background:var(--chip)}
 .dl hr{border:0;border-top:1px solid var(--line);margin:6px 0}
-
 .sheet-bg{position:fixed;inset:0;background:rgba(5,10,18,.6);z-index:40;display:none;align-items:flex-end}
 .sheet-bg.open{display:flex}
 .sheet{background:var(--card);width:100%;max-width:560px;margin:0 auto;border-radius:20px 20px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px))}
@@ -114,14 +88,10 @@ nav button[aria-current="true"]{color:var(--red)}
 .runner .rb{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--card);border-bottom:1px solid var(--line)}
 .runner iframe{flex:1;border:0;width:100%;background:#fff}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:12px;font-size:14px;z-index:60;display:none;max-width:90%;text-align:center}
-.prog{height:6px;background:var(--chip);border-radius:3px;overflow:hidden;margin-top:12px}
-.prog i{display:block;height:100%;width:0;background:var(--red);transition:width 1.1s linear}
 </style>
-<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#C8232C">
 </head>
 <body>
-
 <div class="wrap">
   <div class="top" id="top">
     <div class="bar">
@@ -142,460 +112,431 @@ nav button[aria-current="true"]{color:var(--red)}
 </nav>
 
 <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
-<aside class="drawer" id="drawer" aria-label="Yan menü">
+<aside class="drawer" id="drawer">
   <div class="dh"><div class="seal">H</div><b>HÜKÜM STORE</b><div id="dUser">Giriş yapılmadı</div></div>
   <div class="dl">
     <button onclick="dgo('home')"><span>🏪</span>Mağaza</button>
-    <button onclick="dgo('home','oyun')"><span>🎮</span>Oyunlar</button>
-    <button onclick="dgo('home','uygulama')"><span>📱</span>Uygulamalar</button>
     <button onclick="dgo('library')"><span>📥</span>Kurduklarım</button>
-    <hr>
-    <button onclick="dgo('rewards')"><span>🎁</span>Ödüller ve görevler</button>
-    <button onclick="dgo('leaderboard')"><span>🏆</span>Sıralama</button>
-    <button onclick="dgo('favs')"><span>⭐</span>Favorilerim</button>
+    <button onclick="dgo('plans')"><span>👑</span>Üyelik paketleri</button>
     <button onclick="dgo('dev')"><span>🛠️</span>Geliştirici paneli</button>
+    <hr>
+    <button onclick="dgo('founder')" style="color:var(--brass)"><span>⚡</span>Kurucu Yönetim Paneli</button>
+    <button onclick="dgo('admin')" style="color:var(--red)"><span>🛡️</span>Admin Logları</button>
+    <button onclick="dgo('requests')"><span>📨</span>Taleplerim / Talepler</button>
     <hr>
     <button onclick="dgo('profile')"><span>👤</span>Profilim</button>
     <button onclick="dgo('settings')"><span>⚙️</span>Ayarlar</button>
-    <button onclick="dgo('about')"><span>ℹ️</span>Hakkında</button>
   </div>
 </aside>
 
-<div class="sheet-bg" id="sheetBg" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
-<div class="runner" id="runner"><div class="rb"><button class="ib" onclick="closeRunner()" aria-label="Kapat">✕</button><b id="runName"></b></div><iframe id="runFrame" sandbox="allow-scripts" title="Uygulama"></iframe></div>
-<div class="toast" id="toast" role="status"></div>
+<div class="sheet-bg" id="sheetBg"><div class="sheet" id="sheet"></div></div>
+<div class="runner" id="runner"><div class="rb"><button class="ib" onclick="closeRunner()">✕</button><b id="runName"></b></div><iframe id="runFrame" sandbox="allow-scripts" referrerpolicy="no-referrer" loading="lazy"></iframe></div>
+<div class="toast" id="toast"></div>
 
 <script>
-/* --- HÜKÜM ÇEKİRDEK VERİTABANI & SİSTEMİ --- */
-var DB_KEY = "hukum_core_vault", SES_KEY = "hukum_session", SET_KEY = "hukum_settings";
+/* ======== AYAR: API adresini buraya yaz ======== */
+const API = "https://hukum-store-ap.onrender.com";
+/* ================================================ */
 
-/* Varsayılan Kurucu Hesabı ve Örnek Veriler */
-var defaultDB = {
-  users: {
-    "EYO PAŞA!": { name: "EYO PAŞA!", pass: "Mr_eyo9801234509", role: "kurucu", points: 999999, xp: 999999, plan: "elmas", apps: [], favs: [], installed: [], streak: 30 }
-  },
-  installed: ["d1", "d2"],
-  logs: [{ t: Date.now(), txt: "Sistem zırhlı çekirdek başlatıldı. Kurucu EYO PAŞA! göreve hazır." }],
-  channels: [
-    { id: "c_log", name: "🛡️-güvenlik-logları", msgs: [{ sender: "Sistem", text: "Zırhlı Firewall aktif edildi." }] },
-    { id: "c_admin", name: "👑-admin-merkezi", msgs: [{ sender: "Kurucu", text: "Yönetim odası devrede." }] }
-  ],
-  tickets: []
-};
-
-function loadDB() {
-  try {
-    var r = localStorage.getItem(DB_KEY);
-    if (r) { var d = JSON.parse(r); d.installed = d.installed || []; d.logs = d.logs || []; d.channels = d.channels || []; d.tickets = d.tickets || []; return d; }
-  } catch(e) {}
-  saveDB(defaultDB);
-  return defaultDB;
-}
-function saveDB(d) { try { localStorage.setItem(DB_KEY, JSON.stringify(d)); } catch(e) {} }
-
-function getSes() { try { return localStorage.getItem(SES_KEY); } catch(e) { return null; } }
-function setSes(u) { try { u ? localStorage.setItem(SES_KEY, u) : localStorage.removeItem(SES_KEY); } catch(e) {} }
-
-function getSet() { try { var r = localStorage.getItem(SET_KEY); if (r) return JSON.parse(r); } catch(e) {} return { theme: "auto" }; }
-function putSet(s) { try { localStorage.setItem(SET_KEY, JSON.stringify(s)); } catch(e) {} }
-
-function me() { var u = getSes(); return u ? loadDB().users[u] : null; }
-function saveMe(m) { var d = loadDB(); d.users[m.name] = m; saveDB(d); }
-
-function logAction(txt) {
-  var d = loadDB();
-  d.logs.unshift({ t: Date.now(), txt: txt });
-  if (d.logs.length > 50) d.logs.length = 50;
-  saveDB(d);
-}
-
-function esc(s) { return String(s || "").replace(/[&<>"']/g, function(c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
-function fmt(n) { return Number(n || 0).toLocaleString("tr-TR"); }
-function toast(t) { var e = document.getElementById("toast"); e.textContent = t; e.style.display = "block"; clearTimeout(e.t); e.t = setTimeout(function() { e.style.display = "none"; }, 2600); }
-
-var COLORS = ["#C8232C","#1F5FA8","#1E7A4F","#B8892B","#6B3FA0","#C2571A","#0E7C86","#8A2B55"];
-function colorOf(id) { var h = 0; for(var i=0; i<id.length; i++) h = (h*31 + id.charCodeAt(i)) >>> 0; return COLORS[h % COLORS.length]; }
-
-var DEMO = [
-  {id:"d1", name:"Hüküm Blok", icon:"🧱", cat:"oyun", desc:"Bloklara dokun, puanı topla.", dev:"HÜKÜM", ver:"1.0",
-   code:'<body style="margin:0;font-family:sans-serif;text-align:center;background:#0E1B2C;color:#fff"><h2 style="padding-top:30px">Hüküm Blok</h2><div id=s style="font-size:48px">0</div><div id=b style="margin:30px auto;width:120px;height:120px;background:#C8232C;border-radius:14px;position:relative"></div><p>Bloğa dokun!</p><script>var n=0,b=document.getElementById("b");b.onclick=function(){n++;document.getElementById("s").textContent=n;b.style.left=((Math.random()*60)-30)+"%";b.style.top=(Math.random()*60)+"px"}<\/script></body>'},
-  {id:"d2", name:"Zar At", icon:"🎲", cat:"oyun", desc:"İki zar at, şansını dene.", dev:"HÜKÜM", ver:"1.0",
-   code:'<body style="margin:0;font-family:sans-serif;text-align:center;background:#1E7A4F;color:#fff"><h2 style="padding-top:30px">Zar At</h2><div id=z style="font-size:90px;margin:30px">⚀ ⚀</div><button id=r style="font-size:20px;padding:14px 30px;border:0;border-radius:12px">Zarları at</button><script>var f=["⚀","⚁","⚂","⚃","⚄","⚅"];document.getElementById("r").onclick=function(){document.getElementById("z").textContent=f[Math.floor(Math.random()*6)]+" "+f[Math.floor(Math.random()*6)]}<\/script></body>'}
+const ROLES = ["uye","admin","kidemli_admin","bas_admin","co_owner","owner","kurucu"];
+const ROLE_NAMES = {uye:"Üye",admin:"Admin",kidemli_admin:"Kıdemli Admin",bas_admin:"Baş Admin",co_owner:"Co-Owner",owner:"Owner",kurucu:"Kurucu"};
+const PLANS=[
+ {id:"bronz",name:"HÜKÜM BRONZ",pts:2000,slots:1},
+ {id:"plus",name:"HÜKÜM PLUS",pts:5000,slots:3},
+ {id:"premium",name:"HÜKÜM PREMİUM",pts:10000,slots:7},
+ {id:"gold",name:"HÜKÜM GOLD",pts:20000,slots:15},
+ {id:"elmas",name:"HÜKÜM ELMAS",pts:40000,slots:999}
 ];
+const COLORS=["#C8232C","#1F5FA8","#1E7A4F","#B8892B","#6B3FA0","#C2571A","#0E7C86","#8A2B55"];
 
-function allApps() {
-  var l = DEMO.slice(), d = loadDB();
-  Object.keys(d.users).forEach(function(n) {
-    (d.users[n].apps || []).forEach(function(a) {
-      if(a.code) l.push({id:a.id, name:a.name, icon:a.icon||"📦", cat:a.cat||"uygulama", desc:a.desc, dev:n, ver:a.ver, code:a.code, price:a.price||0, targetUser:a.targetUser||""});
-    });
-  });
-  return l;
+let token = localStorage.getItem("hukum_token") || null;
+let currentUser = null;
+let allAppsCache = [];
+let installedIds = [];
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function fmt(n){return n>=999?"Sınırsız":Number(n).toLocaleString("tr-TR")}
+function colorOf(id){let h=0,s=String(id);for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return COLORS[h%COLORS.length]}
+function toast(t){const e=document.getElementById("toast");e.textContent=t;e.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display="none",2600)}
+
+async function api(path, opts={}){
+  const headers = {"Content-Type":"application/json"};
+  if (token) headers.Authorization = "Bearer " + token;
+  const res = await fetch(API + path, {...opts, headers: {...headers, ...(opts.headers||{})}});
+  let data = null;
+  try { data = await res.json(); } catch(e) {}
+  if (!res.ok) throw new Error((data && data.error) || "İstek başarısız");
+  return data;
 }
-function appById(id) { return allApps().filter(function(a) { return a.id === id; })[0]; }
-function isInst(id) { return loadDB().installed.indexOf(id) > -1; }
-function icoHTML(a, cls) { return '<div class="ico '+(cls||"")+'" style="background:'+colorOf(a.id)+'">'+esc(a.icon)+'</div>'; }
 
-/* --- GEZİNME & RENDER --- */
-var view = "home", vid = "", stack = [], filter = "hepsi";
-function tabTo(v) { stack = []; view = v; vid = ""; render(); }
-function go(v, id) { stack.push({v:view, i:vid}); view = v; vid = id||""; render(); }
-function back() { var p = stack.pop(); if (p) { view = p.v; vid = p.i; } else { view = "home"; vid = ""; } render(); }
-function dgo(v, f) { closeDrawer(); if(f) filter = f; else if(v==="home") filter="hepsi"; tabTo(v); }
-function openDrawer() { document.getElementById("drawer").classList.add("open"); document.getElementById("scrim").classList.add("open"); }
-function closeDrawer() { document.getElementById("drawer").classList.remove("open"); document.getElementById("scrim").classList.remove("open"); }
-function backBar(t) { return '<div class="back"><button onclick="back()" aria-label="Geri">←</button>'+t+'</div>'; }
+async function refreshMe(){
+  if (!token) { currentUser = null; return; }
+  try {
+    currentUser = await api("/auth/me");
+    installedIds = await api("/installs");
+  } catch(e) {
+    token = null; localStorage.removeItem("hukum_token"); currentUser = null; installedIds = [];
+  }
+}
 
-function render() {
-  var m = me(), v = document.getElementById("view");
-  var root = ["home","search","rewards","dev","profile"];
-  var navTab = root.indexOf(view) > -1 ? view : (view==="detail"||view==="library"?"home":(view==="plans"||view==="settings"||view==="about"||view==="favs"||view==="founder"||view==="adminroom"?"profile":(view==="leaderboard"?"rewards":"")));
-  document.querySelectorAll("nav button").forEach(function(b){b.setAttribute("aria-current",b.dataset.tab===navTab?"true":"false")});
-  
-  document.getElementById("avBtn").textContent = m ? m.name.charAt(0).toUpperCase() : "?";
-  document.getElementById("dUser").textContent = m ? m.name + " ("+(m.role||"üye")+") · "+fmt(m.points)+" P" : "Giriş yapılmadı";
-  document.getElementById("top").style.display = (view==="search") ? "none" : "block";
+/* ---- gezinme ---- */
+let view="home", vid="", stack=[], filter="hepsi";
+function tabTo(v){stack=[];view=v;vid="";render()}
+function go(v,id){stack.push({v:view,i:vid});view=v;vid=id||"";render()}
+function back(){const p=stack.pop();if(p){view=p.v;vid=p.i}else{view="home";vid=""}render()}
+function dgo(v,f){closeDrawer();if(f)filter=f;tabTo(v)}
+function openDrawer(){document.getElementById("drawer").classList.add("open");document.getElementById("scrim").classList.add("open")}
+function closeDrawer(){document.getElementById("drawer").classList.remove("open");document.getElementById("scrim").classList.remove("open")}
+function backBar(t){return'<div class="back"><button onclick="back()">←</button>'+t+'</div>'}
+function closeSheet(){document.getElementById("sheetBg").classList.remove("open")}
 
-  var fn = {
-    home: vHome, search: vSearch, dev: vDev, profile: vProfile, plans: vPlans,
-    settings: vSettings, about: vAbout, detail: vDetail, library: vLibrary,
-    rewards: vRewards, leaderboard: vBoard, favs: vFavs, founder: vFounderRoom, adminroom: vAdminRoom, ticket: vTicketRoom
-  }[view] || vHome;
+async function render(){
+  const v = document.getElementById("view");
+  v.innerHTML = '<div class="empty">Yükleniyor…</div>';
+  document.getElementById("avBtn").textContent = currentUser ? currentUser.username.charAt(0).toUpperCase() : "?";
+  document.getElementById("dUser").textContent = currentUser ? currentUser.username+" · "+fmt(currentUser.points)+" puan · "+ROLE_NAMES[currentUser.role] : "Giriş yapılmadı";
+  const navTab = ["home","search","rewards","dev","profile"].includes(view) ? view :
+    (["detail","library"].includes(view) ? "home" : (["plans","settings","founder","admin","requests"].includes(view) ? "profile" : ""));
+  document.querySelectorAll("nav button").forEach(b=>b.setAttribute("aria-current", b.dataset.tab===navTab?"true":"false"));
+  document.getElementById("top").style.display = view==="search" ? "none" : "block";
 
-  v.innerHTML = fn(m);
-  if (view === "search") { var i = document.getElementById("q"); if(i) { i.focus(); doSearch(); } }
+  const fns = {home:vHome, search:vSearch, dev:vDev, profile:vProfile, plans:vPlans, settings:vSettings,
+    detail:vDetail, library:vLibrary, rewards:vRewards, founder:vFounder, admin:vAdmin, requests:vRequests};
+  const fn = fns[view] || vHome;
+  try {
+    v.innerHTML = await fn();
+  } catch(e) {
+    v.innerHTML = '<div class="empty">Bir hata oluştu: '+esc(e.message)+'</div>';
+  }
+  if (view==="search"){ const i=document.getElementById("q"); if(i){i.focus(); doSearch();} }
   window.scrollTo(0,0);
 }
 
-/* --- EKRAN FONKSİYONLARI --- */
-function appRow(a) {
-  return '<button class="item" onclick="go(\'detail\',\''+a.id+'\')">'+icoHTML(a)+'<div class="m"><b>'+esc(a.name)+'</b><span>'+esc(a.dev)+' · '+(a.cat==="oyun"?"Oyun":"Uygulama")+(isInst(a.id)?' · Kurulu':'')+(a.price>0?' · '+fmt(a.price)+' P':'')+'</span></div></button>';
+/* ---- ekranlar ---- */
+function icoHTML(a){return '<div class="ico" style="background:'+colorOf(a.id)+'">'+esc(a.icon)+'</div>'}
+function appRow(a){
+  const boosted = a.boosted_until && new Date(a.boosted_until) > new Date();
+  return '<button class="item" onclick="go(\'detail\','+a.id+')">'+icoHTML(a)+
+    '<div class="m"><b>'+esc(a.name)+(boosted?' <span class="badge red">🚀</span>':'')+'</b><span>'+esc(a.dev)+' · '+(a.cat==="oyun"?"Oyun":"Uygulama")+
+    (installedIds.includes(a.id)?' · Kurulu':'')+'</span></div></button>';
 }
 
-function vHome() {
-  var l = allApps().filter(function(a){ return filter==="hepsi" || a.cat===filter; });
-  var h = '<div class="hero"><div class="mark" aria-hidden="true">H</div><h1>Zırhlı Yerli Mağaza</h1><p>Merkezisiz, güvenli ve dosya tabanlı çekirdek sistem.</p><div class="row"><button class="btn on-dark sm" onclick="tabTo(\'dev\')">+ Uygulama Ekle</button></div></div>';
-  h += shelfHTML();
-  h += '<div class="chips" style="margin-top:14px">'+[["hepsi","Hepsi"],["oyun","Oyunlar"],["uygulama","Uygulamalar"]].map(function(c){return'<button class="chip" aria-pressed="'+(filter===c[0])+'" onclick="filter=\''+c[0]+'\';render()">'+c[1]+'</button>'}).join("")+'</div>';
-  if (!l.length) return h + '<div class="empty"><div class="big">📭</div>Bu kategoride henüz uygulama yok.</div>';
-  h += '<h2>Tüm Uygulamalar</h2>' + l.map(appRow).join("");
+async function vHome(){
+  allAppsCache = await api("/apps");
+  const l = allAppsCache.filter(a => filter==="hepsi" || a.cat===filter);
+  let h = '<div class="hero"><h1>HÜKÜM STORE</h1><p>Merkeziyetsiz, zırhlı ve yerli dijital imparatorluk.</p></div>';
+  const inst = allAppsCache.filter(a=>installedIds.includes(a.id));
+  h += '<h2>Ana Ekranım</h2>';
+  h += inst.length ? '<div class="chips" style="flex-wrap:wrap">'+inst.map(a=>'<button class="chip" onclick="runApp('+a.id+')">'+esc(a.icon)+' '+esc(a.name)+'</button>').join("")+'</div>'
+    : '<div class="card"><div class="muted">Kurduğun uygulamalar burada görünür.</div></div>';
+  h += '<div class="chips" style="margin-top:14px">'+[["hepsi","Hepsi"],["oyun","Oyunlar"],["uygulama","Uygulamalar"]]
+    .map(c=>'<button class="chip" aria-pressed="'+(filter===c[0])+'" onclick="filter=\''+c[0]+'\';render()">'+c[1]+'</button>').join("")+'</div>';
+  h += '<h2>Tüm Uygulamalar</h2>';
+  h += l.length ? l.map(appRow).join("") : '<div class="empty"><div class="big">📭</div>Henüz uygulama yok.</div>';
   return h;
 }
 
-function shelfHTML() {
-  var inst = allApps().filter(function(a){ return isInst(a.id); });
-  var h = '<h2>Ana Ekranım</h2>';
-  if (!inst.length) return h + '<div class="card"><div class="muted">Kurduğun oyunlar ve uygulamalar burada görünür.</div></div>';
-  return h + '<div class="grid">' + inst.map(function(a){ return '<button class="gi" onclick="runApp(\''+a.id+'\')" aria-label="'+esc(a.name)+' aç">'+icoHTML(a)+'<span>'+esc(a.name)+'</span></button>'; }).join("") + '</div>';
+function vSearch(){
+  return '<div class="bar" style="margin:10px 0"><button class="ib" onclick="tabTo(\'home\')">←</button><input id="q" type="search" placeholder="Oyun veya uygulama ara" oninput="doSearch()" style="border:0;background:none;padding:10px 4px;margin:0"></div><div id="res"></div>';
+}
+async function doSearch(){
+  const q = (document.getElementById("q").value||"").trim().toLowerCase();
+  const r = document.getElementById("res");
+  if (!allAppsCache.length) allAppsCache = await api("/apps");
+  const l = allAppsCache.filter(a => !q || (a.name+" "+a.description+" "+a.dev).toLowerCase().includes(q));
+  r.innerHTML = l.length ? l.map(appRow).join("") : '<div class="empty"><div class="big">🔍</div>Sonuç yok.</div>';
 }
 
-function vSearch() {
-  return '<div class="bar" style="margin:10px 0"><button class="ib" onclick="tabTo(\'home\')" aria-label="Geri">←</button><input id="q" type="search" placeholder="Oyun veya uygulama ara" oninput="doSearch()" style="border:0;background:none;padding:10px 4px;margin:0"></div><div id="res"></div>';
-}
-function doSearch() {
-  var q = (document.getElementById("q").value||"").trim().toLowerCase(), r = document.getElementById("res");
-  var l = allApps().filter(function(a){ return !q || (a.name+" "+a.desc+" "+a.dev+" "+a.cat).toLowerCase().indexOf(q) > -1; });
-  r.innerHTML = l.length ? l.map(appRow).join("") : '<div class="empty"><div class="big">🔍</div>"'+esc(q)+'" için sonuç bulunamadı.</div>';
-}
-
-function vDetail() {
-  var a = appById(vid); if(!a) return backBar("Uygulama")+'<div class="empty">Bulunamadı.</div>';
-  var m = me();
-  var inst = isInst(a.id);
-  var h = backBar("") + '<div class="row" style="align-items:flex-start;gap:16px">'+icoHTML(a).replace('class="ico "', 'class="ico" style="width:84px;height:84px;font-size:42px;border-radius:20px;background:'+colorOf(a.id)+'"')+'<div><div style="font-size:22px;font-weight:800">'+esc(a.name)+'</div><div class="muted">'+esc(a.dev)+'</div><div class="muted">'+(a.cat==="oyun"?"Oyun":"Uygulama")+' · v'+esc(a.ver)+'</div>'+(a.price>0?'<div style="color:var(--brass);font-weight:700;margin-top:4px">Fiyat: '+fmt(a.price)+' Puan</div>':'')+'</div></div>';
-  
-  h += '<div class="row" style="margin:18px 0" id="ab">';
+async function vDetail(){
+  const a = allAppsCache.find(x=>x.id==vid) || await api("/apps").then(l=>l.find(x=>x.id==vid));
+  if (!a) return backBar("Uygulama")+'<div class="empty">Bulunamadı.</div>';
+  const inst = installedIds.includes(a.id);
+  let h = backBar("") + '<div class="row" style="align-items:flex-start;gap:16px">'+icoHTML(a)+
+    '<div><div style="font-size:22px;font-weight:800">'+esc(a.name)+'</div><div class="muted">'+esc(a.dev)+'</div><div class="muted">v'+esc(a.ver)+' · '+
+    (a.distribution==="paid"?("Ücretli · "+fmt(a.price)+" puan"):a.distribution==="gift"?"Hediye (sadece davetle)":"Ücretsiz")+'</div></div></div>';
+  h += '<div class="row" style="margin:18px 0">';
   if (inst) {
-    h += '<button class="btn" style="flex:1" onclick="runApp(\''+a.id+'\')">Aç</button><button class="btn alt" onclick="uninstall(\''+a.id+'\')">Kaldır</button>';
+    h += '<button class="btn" style="flex:1" onclick="runApp('+a.id+')">Aç</button><button class="btn alt" onclick="uninstall('+a.id+')">Kaldır</button>';
+  } else if (a.distribution === "paid") {
+    h += '<button class="btn full" onclick="requestAppAccess('+a.id+')">Talep Et ('+fmt(a.price)+' puan)</button>';
+  } else if (a.distribution === "gift") {
+    h += '<button class="btn alt full" disabled>Sadece davetle kurulabilir</button>';
   } else {
-    if (a.price > 0 && m && m.name !== a.dev && !["kurucu","owner","co-owner","bas-admin","kidemli-admin","admin"].includes(m.role)) {
-      h += '<button class="btn" style="flex:1" onclick="buyApp(\''+a.id+'\')">Satın Al ('+fmt(a.price)+' P)</button>';
-      h += '<button class="btn alt" onclick="openOfferModal(\''+a.id+'\')">Teklif İste</button>';
-    } else {
-      h += '<button class="btn" style="flex:1" onclick="install(\''+a.id+'\')">Kur</button>';
-    }
+    h += '<button class="btn full" onclick="install('+a.id+')">Kur</button>';
   }
-  h += '</div><div class="card"><h3>Hakkında</h3><div class="muted">'+esc(a.desc)+'</div></div>';
+  h += '</div><div class="card"><h3>Hakkında</h3><div class="muted">'+esc(a.description||"Açıklama yok.")+'</div></div>';
+  if (currentUser && ROLES.indexOf(currentUser.role) >= ROLES.indexOf("uye") && currentUser.points >= 2000) {
+    h += '<button class="btn alt full" onclick="boostApp('+a.id+')">🚀 Öne Çıkar (2000 puan, 24 saat)</button>';
+  }
+  if (currentUser) {
+    h += '<button class="btn alt full" style="margin-top:8px;color:var(--red)" onclick="reportApp('+a.id+')">🚩 Şikayet Et</button>';
+  }
   return h;
 }
-
-function buyApp(id) {
-  var m = me(), a = appById(id);
-  if (!m) return tabTo("profile");
-  if (m.points < a.price) return toast("Yetersiz puan!");
-  m.points -= a.price;
-  saveMe(m);
-  var d = loadDB();
-  d.installed.push(id);
-  saveDB(d);
-  logAction(m.name + ", " + a.name + " adlı ücretli uygulamayı satın aldı.");
-  toast("Satın alma başarılı, kuruldu!");
-  render();
-}
-
-function openOfferModal(id) {
-  var m = me(), a = appById(id);
-  if (!m) return tabTo("profile");
-  var reason = prompt("Yetkililere teklif veya indirim sebebi yazın:");
+async function reportApp(id){
+  const reason = prompt("Bu uygulamayı neden şikayet ediyorsun?");
   if (!reason) return;
-  var d = loadDB();
-  var ticketId = "t_" + Date.now();
-  d.tickets.push({ id: ticketId, appId: id, appName: a.name, user: m.name, reason: reason, status: "açık" });
-  saveDB(d);
-  logAction(m.name + ", " + a.name + " için teklif talebi açtı.");
-  toast("Teklif talebi log kanalına iletildi!");
-  go("ticket", ticketId);
+  try { await api("/reports", {method:"POST", body: JSON.stringify({appId:id, reason})}); toast("Şikayetin iletildi"); }
+  catch(e){ toast(e.message); }
 }
 
-function install(id) {
-  var d = loadDB();
-  if (d.installed.indexOf(id) < 0) d.installed.push(id);
-  saveDB(d);
-  toast("Kuruldu!");
+async function install(id){
+  if (!currentUser) { toast("Önce giriş yap"); return tabTo("profile"); }
+  await api("/installs", {method:"POST", body: JSON.stringify({appId:id})});
+  installedIds.push(id);
+  toast("Kuruldu, ana ekrana eklendi");
   render();
 }
-function uninstall(id) {
-  var d = loadDB();
-  d.installed = d.installed.filter(function(x){ return x !== id; });
-  saveDB(d);
-  toast("Kaldırıldı");
-  render();
+async function uninstall(id){
+  await api("/installs/"+id, {method:"DELETE"});
+  installedIds = installedIds.filter(x=>x!==id);
+  toast("Kaldırıldı"); render();
+}
+async function boostApp(id){
+  try { await api("/apps/"+id+"/boost", {method:"POST"}); await refreshMe(); toast("Öne çıkarıldı 🚀"); render(); }
+  catch(e){ toast(e.message); }
+}
+async function requestAppAccess(id){
+  if (!currentUser) { toast("Önce giriş yap"); return tabTo("profile"); }
+  const reason = prompt("Talep sebebini yaz:");
+  if (reason === null) return;
+  await api("/requests", {method:"POST", body: JSON.stringify({type:"app_access", targetAppId:id, reason})});
+  toast("Talebin gönderildi, yetkililer inceleyecek");
 }
 
-function vLibrary() {
-  var l = allApps().filter(function(a){ return isInst(a.id); });
-  return backBar("Kurduklarım") + (l.length ? l.map(appRow).join("") : '<div class="empty"><div class="big">📥</div>Henüz kurulu bir şey yok.</div>');
+async function vLibrary(){
+  if (!allAppsCache.length) allAppsCache = await api("/apps");
+  const l = allAppsCache.filter(a=>installedIds.includes(a.id));
+  return backBar("Kurduklarım") + (l.length ? l.map(appRow).join("") : '<div class="empty"><div class="big">📥</div>Henüz bir şey kurmadın.</div>');
 }
 
-/* --- PROFİL & YETKİLER --- */
-function vProfile(m) {
-  if (!m) {
-    return '<div class="card" style="margin-top:8px"><h3>Giriş / Kayıt</h3><label>Kullanıcı Adı</label><input id="u"><label>Şifre</label><input id="p" type="password"><div class="row" style="margin-top:14px"><button class="btn" style="flex:1" onclick="auth(false)">Giriş</button><button class="btn alt" style="flex:1" onclick="auth(true)">Kayıt Ol</button></div></div>';
-  }
-  var isKurucu = (m.name === "EYO PAŞA!" || m.role === "kurucu");
-  var isAdminOrStaff = isKurucu || ["owner","co-owner","bas-admin","kidemli-admin","admin"].includes(m.role);
-
-  var h = '<div class="card" style="margin-top:8px;text-align:center"><div class="av" style="width:72px;height:72px;font-size:30px;margin:0 auto 10px">'+esc(m.name.charAt(0))+'</div><div style="font-size:20px;font-weight:800">'+esc(m.name)+'</div><div class="muted">Rol: <b>'+(m.role||"Üye")+'</b> · Puan: <b>'+fmt(m.points)+'</b></div>';
-  h += '<div class="stats"><div><b>'+(m.apps||[]).length+'</b><span>Yayınlanan</span></div><div><b>'+loadDB().installed.length+'</b><span>Kurulan</span></div></div>';
-  h += '</div>';
-
-  if (isKurucu) {
-    h += '<div class="card" style="background:var(--ink);color:var(--bg)"><h3>👑 Kurucu Özel Alanı</h3><div class="muted" style="color:#aaa">Merkezisiz dosya sunucusu ve tam yetki odası.</div><button class="btn full" style="margin-top:10px" onclick="go(\'founder\')">Gizli Kurucu Odasına Gir</button></div>';
-  }
-  if (isAdminOrStaff) {
-    h += '<div class="card"><h3>🛡️ Admin & Log Odası</h3><button class="btn alt full" onclick="go(\'adminroom\')">Yönetim ve Log Paneline Git</button></div>';
-  }
-
+async function vProfile(){
+  if (!currentUser) return `
+    <div class="card" style="margin-top:8px"><h3>Giriş Yap / Kayıt Ol</h3>
+    <label>Kullanıcı adı</label><input id="u" autocomplete="username">
+    <label>Şifre</label><input id="p" type="password" autocomplete="current-password">
+    <div class="row" style="margin-top:14px">
+      <button class="btn" style="flex:1" onclick="doLogin()">Giriş yap</button>
+      <button class="btn alt" style="flex:1" onclick="doRegister()">Kayıt ol</button>
+    </div></div>`;
+  let h = '<div class="card" style="margin-top:8px;text-align:center"><div class="av" style="width:72px;height:72px;font-size:30px;margin:0 auto 10px">'+esc(currentUser.username.charAt(0).toUpperCase())+'</div>'+
+    '<div style="font-size:20px;font-weight:800">'+esc(currentUser.username)+'</div><div class="muted">'+ROLE_NAMES[currentUser.role]+' · '+(currentUser.plan||"Paket yok")+'</div>'+
+    '<div class="stats"><div><b>'+fmt(currentUser.points)+'</b><span>Puan</span></div></div></div>';
   h += '<div class="card" style="padding:0 14px">';
-  [["🎁","Ödüller","rewards"],["⭐","Favoriler","favs"],["🏆","Sıralama","leaderboard"],["📥","Kurduklarım","library"],["🛠️","Geliştirici","dev"],["⚙️","Ayarlar","settings"],["ℹ️","Hakkında","about"]].forEach(function(r){
-    h += '<button class="set" style="width:100%;border:0;background:none;text-align:left" onclick="go(\''+r[2]+'\')"><span>'+r[0]+'&nbsp;&nbsp;'+r[1]+'</span><span class="muted">›</span></button>';
-  });
-  return h + '</div><button class="btn alt full" onclick="logout()">Çıkış Yap</button>';
-}
-
-function auth(isReg) {
-  var u = (document.getElementById("u").value||"").trim();
-  var p = (document.getElementById("p").value||"").trim();
-  if (!u || !p) return toast("Bilgileri doldur!");
-  var d = loadDB();
-  if (u === "EYO PAŞA!" && p === "Mr_eyo9801234509") {
-    d.users["EYO PAŞA!"] = d.users["EYO PAŞA!"] || { name: "EYO PAŞA!", points: 999999, role: "kurucu" };
-    d.users["EYO PAŞA!"].role = "kurucu";
-    saveDB(d);
-    setSes("EYO PAŞA!");
-    toast("Kurucu girişi yapıldı!");
-    render();
-    return;
-  }
-  if (isReg) {
-    if (d.users[u]) return toast("Bu kullanıcı adı alınmış!");
-    d.users[u] = { name: u, pass: p, role: "uye", points: 500, xp: 500, apps: [], favs: [], installed: [] };
-    saveDB(d);
-    setSes(u);
-    logAction("Yeni kullanıcı kayıt oldu: " + u);
-    toast("Kayıt olundu, 500 puan hediye!");
-  } else {
-    var usr = d.users[u];
-    if (!usr || usr.pass !== p) return toast("Hatalı kullanıcı adı veya şifre!");
-    setSes(u);
-    toast("Giriş başarılı!");
-  }
-  render();
-}
-function logout() { setSes(null); toast("Çıkış yapıldı"); render(); }
-
-/* --- KURUCU GİZLİ OYUN & SUNUCU ODASI --- */
-function vFounderRoom() {
-  var m = me();
-  if (!m || m.name !== "EYO PAŞA!") return backBar("Hata") + '<div class="card">Bu odaya sadece Kurucu (EYO PAŞA!) girebilir!</div>';
-  var d = loadDB();
-  var usersList = Object.keys(d.users).map(function(uname){
-    var usr = d.users[uname];
-    return '<div class="set"><div><b>'+esc(uname)+'</b><small>Rol: '+esc(usr.role||"üye")+' · Puan: '+fmt(usr.points)+'</small></div>' +
-           '<select onchange="changeRole(\''+uname+'\', this.value)">' +
-           '<option value="uye" '+(usr.role==="uye"?"selected":"")+'>Üye</option>' +
-           '<option value="admin" '+(usr.role==="admin"?"selected":"")+'>Admin</option>' +
-           '<option value="kidemli-admin" '+(usr.role==="kidemli-admin"?"selected":"")+'>Kıdemli Admin</option>' +
-           '<option value="bas-admin" '+(usr.role==="bas-admin"?"selected":"")+'>Baş Admin</option>' +
-           '<option value="co-owner" '+(usr.role==="co-owner"?"selected":"")+'>Co-Owner</option>' +
-           '<option value="owner" '+(usr.role==="owner"?"selected":"")+'>Owner</option>' +
-           '</select></div>';
-  }).join("");
-
-  return backBar("Kurucu Gizli Odası") +
-    '<div class="card" style="background:var(--ink);color:var(--bg)"><h3>💻 Merkezisiz Yerel Sunucu Dosyası</h3>' +
-    '<div class="muted" style="color:#bbb">Tüm veriler cihazda şifreli <b>hukum_core_vault.enc</b> dosya bloğunda tutuluyor.</div>' +
-    '<button class="btn sm on-dark" style="margin-top:10px" onclick="exportVault()">Sunucu Dosyasını İndir / Yedekle</button></div>' +
-    '<div class="card"><h3>👥 Kullanıcılar ve Yetki Dağıtımı</h3><div class="muted">İstediğin kullanıcıyı yetkilendir veya rutbesini geri al.</div>' + usersList + '</div>';
-}
-
-function changeRole(uname, newRole) {
-  var d = loadDB();
-  if (d.users[uname]) {
-    d.users[uname].role = newRole;
-    saveDB(d);
-    logAction("Kurucu, " + uname + " kullanıcısının rolünü " + newRole + " yaptı.");
-    toast(uname + " yetkisi güncellendi: " + newRole);
-    render();
-  }
-}
-
-function exportVault() {
-  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem(DB_KEY));
-  var dlAnchor = document.createElement('a');
-  dlAnchor.setAttribute("href", dataStr);
-  dlAnchor.setAttribute("download", "hukum_core_vault.enc");
-  document.body.appendChild(dlAnchor);
-  dlAnchor.click();
-  dlAnchor.remove();
-  toast("Sunucu dosya bloğu indirildi!");
-}
-
-/* --- ADMIN VE LOG ODASI --- */
-function vAdminRoom() {
-  var d = loadDB();
-  var logsHTML = d.logs.map(function(l){ return '<div style="font-family:monospace;font-size:12px;padding:6px 0;border-bottom:1px solid var(--line)">['+new Date(l.t).toLocaleTimeString()+'] '+esc(l.txt)+'</div>'; }).join("");
-  var ticketsHTML = d.tickets.map(function(t){
-    return '<div class="card"><b>'+esc(t.appName)+'</b> - İsteyen: <i>'+esc(t.user)+'</i><div class="muted">Sebep: '+esc(t.reason)+'</div>' +
-           '<div class="row" style="margin-top:10px"><button class="btn sm" onclick="resolveTicket(\''+t.id+'\', true)">Onayla & Ver</button><button class="btn alt sm" onclick="resolveTicket(\''+t.id+'\', false)">Reddet / Kapat</button></div></div>';
-  }).join("") || '<div class="muted">Bekleyen teklif veya talep yok.</div>';
-
-  return backBar("Yönetim & Log Kulesi") +
-    '<div class="card"><h3>📜 Canlı Loglama Kulesi</h3><div style="max-height:200px;overflow-y:auto">'+logsHTML+'</div></div>' +
-    '<div class="card"><h3>🤝 Geliştirici & Ürün Teklifleri (Denetim)</h3>'+ticketsHTML+'</div>';
-}
-
-function resolveTicket(tid, approved) {
-  var d = loadDB();
-  var t = d.tickets.filter(function(x){ return x.id === tid; })[0];
-  if (!t) return;
-  if (approved) {
-    if (d.installed.indexOf(t.appId) < 0) d.installed.push(t.appId);
-    logAction(t.user + " için " + t.appName + " talebi yetkililerce onaylandı.");
-    toast("Talep onaylandı ve uygulama kullanıcıya verildi!");
-  } else {
-    logAction(t.user + " için " + t.appName + " talebi reddedildi.");
-    toast("Talep reddedildi.");
-  }
-  d.tickets = d.tickets.filter(function(x){ return x.id !== tid; });
-  saveDB(d);
-  render();
-}
-
-function vTicketRoom() { return backBar("Teklif Kanalı") + '<div class="card"><h3>Teklifiniz Alındı</h3><div class="muted">Yetkililer ve Kurucu log kanalından inceleyip onayladığında uygulamanız açılacak veya kurulacaktır.</div></div>'; }
-
-/* --- GELİŞTİRİCİ & 4 AŞAMALI YAYINLAMA --- */
-var PUBLISH_COST = 10000;
-var ICONS = ["🎮","🧩","🎯","⚔️","🎲","🚀","🧱","🏎️","⚽","👾"];
-function pickIcon(b) { document.querySelectorAll("#icp .chip").forEach(function(c){c.setAttribute("aria-pressed","false")}); b.setAttribute("aria-pressed","true"); }
-
-function vDev(m) {
-  if (!m) return '<h2 style="margin-top:6px">Geliştirici Paneli</h2><div class="card"><div class="muted">Uygulama yayınlamak için giriş yapmalısın.</div></div><button class="btn full" onclick="tabTo(\'profile\')">Giriş Yap</button>';
-  
-  var h = '<h2 style="margin-top:6px">Uygulama / Oyun Yayınla</h2>' +
-          '<div class="card"><label for="an">Uygulama Adı</label><input id="an" maxlength="30">' +
-          '<label for="ad">Kısa Açıklama</label><input id="ad" maxlength="80">' +
-          '<label for="ac">Kategori</label><select id="ac"><option value="oyun">Oyun</option><option value="uygulama">Uygulama</option></select>' +
-          '<label>Yayınlanma Şekli</label><select id="pubType" onchange="togglePriceBox(this.value)">' +
-          '<option value="1">1. Bedava</option>' +
-          '<option value="2">2. Ücretli (Max 30 Bin Puan)</option>' +
-          '<option value="3">3. Seçilen Kullanıcıya Özel / Bedava Ver</option>' +
-          '<option value="4">4. Teklif İsteme Modu (Anlaşma ve Denetim)</option>' +
-          '</select>' +
-          '<div id="priceBox" style="display:none"><label for="aprice">Ücret (Puan cinsinden, max 30000)</label><input id="aprice" type="number" max="30000" value="1000"></div>' +
-          '<div id="targetBox" style="display:none"><label for="atarget">Hangi Kullanıcıya Verilecek? (Kullanıcı Adı)</label><input id="atarget" placeholder="Örn: Ahmet123"></div>' +
-          '<label>Simge</label><div class="chips" id="icp">'+ICONS.map(function(e,i){return'<button class="chip" style="font-size:20px" aria-pressed="'+(i===0)+'" onclick="pickIcon(this)">'+e+'</button>'}).join("")+'</div>' +
-          '<label for="nc">Kod (HTML / JS / CSS)</label><textarea id="nc" placeholder="<h1>Merhaba</h1>"></textarea>' +
-          '<button class="btn full" style="margin-top:10px" onclick="publishApp()">Hemen Yayınla</button></div>';
+  const items = [["📥","Kurduklarım","library"],["👑","Üyelik paketleri","plans"],["🛠️","Geliştirici paneli","dev"],["📨","Taleplerim","requests"],["⚙️","Ayarlar","settings"]];
+  if (ROLES.indexOf(currentUser.role) >= ROLES.indexOf("admin")) items.push(["🛡️","Admin Logları","admin"]);
+  if (currentUser.role === "kurucu" || ROLES.indexOf(currentUser.role) >= ROLES.indexOf("co_owner")) items.push(["⚡","Kurucu Paneli","founder"]);
+  items.forEach(r=>{ h += '<button class="set" style="width:100%;border:0;background:none;text-align:left" onclick="go(\''+r[2]+'\')"><span>'+r[0]+'&nbsp;&nbsp;'+r[1]+'</span><span class="muted">›</span></button>'; });
+  h += '</div><button class="btn alt full" onclick="logout()">Çıkış yap</button>';
   return h;
 }
 
-function togglePriceBox(val) {
-  document.getElementById("priceBox").style.display = (val === "2") ? "block" : "none";
-  document.getElementById("targetBox").style.display = (val === "3") ? "block" : "none";
+async function doLogin(){
+  const username = document.getElementById("u").value.trim();
+  const password = document.getElementById("p").value;
+  try {
+    const data = await api("/auth/login", {method:"POST", body: JSON.stringify({username, password})});
+    token = data.token; localStorage.setItem("hukum_token", token);
+    await refreshMe(); toast("Hoş geldin, "+username); tabTo("home");
+  } catch(e){ toast(e.message); }
+}
+async function doRegister(){
+  const username = document.getElementById("u").value.trim();
+  const password = document.getElementById("p").value;
+  try {
+    const data = await api("/auth/register", {method:"POST", body: JSON.stringify({username, password})});
+    token = data.token; localStorage.setItem("hukum_token", token);
+    await refreshMe(); toast("Hesabın oluşturuldu"); go("plans");
+  } catch(e){ toast(e.message); }
+}
+function logout(){ token=null; localStorage.removeItem("hukum_token"); currentUser=null; installedIds=[]; tabTo("home"); }
+
+async function vPlans(){
+  let h = backBar("Üyelik Paketleri");
+  PLANS.forEach(p=>{
+    const on = currentUser && currentUser.plan===p.id;
+    h += '<div class="card'+(on?' ':'')+'"><h3>'+p.name+'</h3><div class="muted">Haftada '+fmt(p.pts)+' puan · '+(p.slots>=999?"Sınırsız":p.slots)+' ücretsiz yayın hakkı</div>'+
+      '<button class="btn'+(on?' alt':'')+' full" style="margin-top:10px" onclick="pickPlan(\''+p.id+'\')">'+(on?"Aktif paketin":"Bu paketi seç")+'</button></div>';
+  });
+  return h;
+}
+async function pickPlan(id){
+  if (!currentUser) { toast("Önce giriş yap"); return tabTo("profile"); }
+  try { await api("/plans/"+id, {method:"POST"}); await refreshMe(); toast("Paket aktif edildi"); render(); }
+  catch(e){ toast(e.message); }
 }
 
-function publishApp() {
-  var m = me(); if(!m) return tabTo("profile");
-  var name = (document.getElementById("an").value||"").trim();
-  var desc = (document.getElementById("ad").value||"").trim();
-  var cat = document.getElementById("ac").value;
-  var pubType = document.getElementById("pubType").value;
-  var price = 0;
-  var targetUser = "";
-  if (pubType === "2") {
-    price = parseInt(document.getElementById("aprice").value || 0);
-    if (price > 30000) return toast("Ücret en fazla 30 bin puan olabilir!");
-  }
-  if (pubType === "3") {
-    targetUser = (document.getElementById("atarget").value||"").trim();
-    if (!targetUser) return toast("Kullanıcı adı girmelisin!");
-  }
-  var iconEl = document.querySelector("#icp .chip[aria-pressed='true']");
-  var icon = iconEl ? iconEl.getAttribute("data-e") || iconEl.textContent : "📦";
-  var code = document.getElementById("nc").value;
-
-  if (!name || !code) return toast("İsim ve kod zorunludur!");
-
-  m.apps = m.apps || [];
-  var newApp = { id: "app_" + Date.now(), name: name, desc: desc, cat: cat, icon: icon, ver: "1.0", code: code, price: price, targetUser: targetUser };
-  m.apps.push(newApp);
-  saveMe(m);
-  logAction(m.name + " yeni uygulama yayınladı: " + name);
-  toast("Uygulama başarıyla yayınlandı!");
-  tabTo("home");
+async function vDev(){
+  if (!currentUser) return backBar("Geliştirici Paneli")+'<div class="card"><div class="muted">Giriş yapmalısın.</div></div>';
+  const myApps = await api("/apps/mine");
+  let h = backBar("Geliştirici Paneli") + `
+    <div class="card"><h3>Uygulama Ekle</h3>
+    <label>Adı</label><input id="an" maxlength="30">
+    <label>Açıklama</label><input id="ad" maxlength="120">
+    <label>Kategori</label><select id="ac"><option value="oyun">Oyun</option><option value="uygulama">Uygulama</option></select>
+    <label>Dağıtım türü</label><select id="adist">
+      <option value="free">Ücretsiz</option>
+      <option value="paid">Ücretli (max 30.000 puan)</option>
+      <option value="gift">Hediye (sadece davetle)</option>
+    </select>
+    <label>Fiyat (sadece ücretliyse, puan)</label><input id="aprice" type="number" value="0">
+    <label>Simge (emoji)</label><input id="aicon" value="🎮" maxlength="2">
+    <label>Kod (HTML, CSS ve JavaScript birlikte — tarayıcı sadece bunları çalıştırabilir, istediğin kadar büyük/karmaşık olabilir)</label>
+    <textarea id="nc" placeholder="&lt;html&gt;...&lt;/html&gt;"></textarea>
+    <div class="muted" style="margin-top:6px">Yayınladığında uygulaman önce yetkili onayına düşer, onaylanınca mağazada görünür.</div>
+    <button class="btn full" style="margin-top:10px" onclick="publishApp()">Yayınla</button></div>`;
+  h += '<h2>Uygulamalarım</h2>';
+  if (!myApps.length) h += '<div class="empty">Henüz uygulaman yok.</div>';
+  myApps.forEach(a=>{
+    h += '<div class="card"><div class="row">'+icoHTML(a)+'<div><b>'+esc(a.name)+'</b><span class="badge">v'+esc(a.ver)+'</span>'+
+      '<span class="badge '+(a.approved?'':'red')+'">'+(a.approved?'Onaylı':'Onay bekliyor')+'</span></div></div>'+
+      '<label>Token</label><div class="token">'+esc(a.token)+'</div>'+
+      '<details><summary>Kod güncelle</summary><label>Token</label><input id="tk'+a.id+'">'+
+      '<label>Yeni kod</label><textarea id="cd'+a.id+'">'+esc(a.code||"")+'</textarea>'+
+      '<button class="btn full" style="margin-top:10px" onclick="updateCode('+a.id+')">Yükle</button></details></div>';
+  });
+  return h;
+}
+async function publishApp(){
+  const name = document.getElementById("an").value.trim();
+  const description = document.getElementById("ad").value.trim();
+  const cat = document.getElementById("ac").value;
+  const distribution = document.getElementById("adist").value;
+  const price = parseInt(document.getElementById("aprice").value || "0", 10);
+  const icon = document.getElementById("aicon").value || "🎮";
+  const code = document.getElementById("nc").value;
+  if (!name) return toast("İsim yazmalısın");
+  try {
+    await api("/apps", {method:"POST", body: JSON.stringify({name, description, cat, icon, code, distribution, price})});
+    await refreshMe(); toast("Yayınlandı!"); tabTo("home");
+  } catch(e){ toast(e.message); }
+}
+async function updateCode(id){
+  const token_ = document.getElementById("tk"+id).value.trim();
+  const code = document.getElementById("cd"+id).value;
+  try { const r = await api("/apps/"+id+"/code", {method:"PATCH", body: JSON.stringify({token: token_, code})}); toast("Güncellendi, v"+r.ver); render(); }
+  catch(e){ toast(e.message); }
 }
 
-/* --- RUNNER & DİĞERLERİ --- */
-function runApp(id) {
-  var a = appById(id); if(!a || !a.code) return toast("Çalıştırılacak kod yok!");
+async function vRewards(){
+  if (!currentUser) return backBar("Ödüller")+'<div class="card"><div class="muted">Giriş yapmalısın.</div></div>';
+  return backBar("Ödüller") + '<div class="card"><h3>Puan talebi gönder</h3><div class="muted">Yetkililer onaylarsa puan hesabına eklenir.</div>'+
+    '<label>İstenen miktar</label><input id="reqamt" type="number" value="500">'+
+    '<label>Sebep</label><input id="reqreason" placeholder="Neden puan istiyorsun?">'+
+    '<button class="btn full" style="margin-top:10px" onclick="sendPointsRequest()">Talep Gönder</button></div>';
+}
+async function sendPointsRequest(){
+  const amount = parseInt(document.getElementById("reqamt").value||"0",10);
+  const reason = document.getElementById("reqreason").value.trim();
+  try { await api("/requests", {method:"POST", body: JSON.stringify({type:"points", amount, reason})}); toast("Talep gönderildi"); }
+  catch(e){ toast(e.message); }
+}
+
+async function vRequests(){
+  if (!currentUser) return backBar("Talepler")+'<div class="card"><div class="muted">Giriş yapmalısın.</div></div>';
+  if (ROLES.indexOf(currentUser.role) < ROLES.indexOf("admin")) {
+    return backBar("Taleplerim")+'<div class="empty">Taleplerini Ödüller sayfasından gönderebilirsin. Geçmiş talep listesi yakında.</div>';
+  }
+  const reqs = await api("/requests");
+  let h = backBar("Bekleyen Talepler");
+  if (!reqs.length) h += '<div class="empty">Bekleyen talep yok.</div>';
+  reqs.forEach(r=>{
+    h += '<div class="card"><b>'+esc(r.requester)+'</b> — '+(r.type==="points"?("Puan talebi: "+fmt(r.amount)):("Uygulama erişimi #"+r.target_app_id))+
+      '<div class="muted">'+esc(r.reason||"")+'</div><div class="row" style="margin-top:10px">'+
+      '<button class="btn sm" onclick="handleRequest('+r.id+',\'approve\')">Onayla</button>'+
+      '<button class="btn alt sm" onclick="handleRequest('+r.id+',\'deny\')">Reddet</button></div></div>';
+  });
+  return h;
+}
+async function handleRequest(id, action){
+  try { await api("/requests/"+id, {method:"PATCH", body: JSON.stringify({action})}); toast("İşlendi"); render(); }
+  catch(e){ toast(e.message); }
+}
+
+async function vFounder(){
+  if (!currentUser || ROLES.indexOf(currentUser.role) < ROLES.indexOf("co_owner"))
+    return backBar("Yetkisiz")+'<div class="empty">Bu panele sadece üst düzey yetkililer girebilir.</div>';
+  const users = await api("/users");
+  let h = backBar("Kurucu & Yönetim Paneli") + '<div class="card"><h3>Kullanıcı Yönetimi</h3><div class="muted">Rol ata, puan ekle/çıkar.</div></div>';
+  users.forEach(u=>{
+    h += '<div class="card"><div class="row"><div style="flex:1"><b>'+esc(u.username)+'</b><div class="muted">'+ROLE_NAMES[u.role]+' · '+fmt(u.points)+' puan</div></div></div>'+
+      '<label>Rol</label><select onchange="changeRole('+u.id+',this.value)">'+
+      ROLES.map(r=>'<option value="'+r+'" '+(u.role===r?'selected':'')+'>'+ROLE_NAMES[r]+'</option>').join("")+'</select>'+
+      '<div class="row" style="margin-top:10px"><input type="number" id="pts'+u.id+'" placeholder="±puan" style="flex:1">'+
+      '<button class="btn sm" onclick="adjustPoints('+u.id+')">Uygula</button></div></div>';
+  });
+  return h;
+}
+async function changeRole(id, role){
+  try { await api("/users/"+id+"/role", {method:"PATCH", body: JSON.stringify({role})}); toast("Rol güncellendi"); render(); }
+  catch(e){ toast(e.message); }
+}
+async function adjustPoints(id){
+  const amount = parseInt(document.getElementById("pts"+id).value || "0", 10);
+  if (!amount) return;
+  try { await api("/users/"+id+"/points", {method:"PATCH", body: JSON.stringify({amount, reason:"Yönetim ayarı"})}); toast("Puan güncellendi"); render(); }
+  catch(e){ toast(e.message); }
+}
+
+async function vAdmin(){
+  if (!currentUser || ROLES.indexOf(currentUser.role) < ROLES.indexOf("admin"))
+    return backBar("Yetkisiz")+'<div class="empty">Sadece yetkililer görebilir.</div>';
+
+  const [pending, reports, logs] = await Promise.all([
+    api("/apps/pending"), api("/reports"), api("/logs")
+  ]);
+
+  let h = backBar("Yönetim: Moderasyon & Loglar");
+
+  h += '<h2>Onay Bekleyen Uygulamalar ('+pending.length+')</h2>';
+  if (!pending.length) h += '<div class="empty">Bekleyen yok.</div>';
+  pending.forEach(a=>{
+    h += '<div class="card"><b>'+esc(a.name)+'</b> — '+esc(a.dev)+'<div class="muted">'+esc(a.description||"")+'</div>'+
+      '<details><summary>Kodu incele</summary><textarea readonly>'+esc(a.code||"")+'</textarea></details>'+
+      '<div class="row" style="margin-top:10px">'+
+      '<button class="btn sm" onclick="approveApp('+a.id+',true)">Onayla</button>'+
+      '<button class="btn alt sm" onclick="approveApp('+a.id+',false)">Reddet & Sil</button></div></div>';
+  });
+
+  h += '<h2>Açık Şikayetler ('+reports.length+')</h2>';
+  if (!reports.length) h += '<div class="empty">Açık şikayet yok.</div>';
+  reports.forEach(r=>{
+    h += '<div class="card"><b>'+esc(r.app_name)+'</b> hakkında, bildiren: '+esc(r.reporter)+'<div class="muted">'+esc(r.reason||"")+'</div>'+
+      '<button class="btn sm" style="margin-top:10px" onclick="resolveReport('+r.id+')">Çözüldü işaretle</button></div>';
+  });
+
+  h += '<h2>Sistem Logları</h2>';
+  logs.forEach(l=>{ h += '<div class="card" style="padding:8px 12px"><small class="muted">'+new Date(l.created_at).toLocaleString("tr-TR")+'</small><div>'+esc(l.actor)+': '+esc(l.action)+'</div></div>'; });
+  return h;
+}
+async function approveApp(id, approve){
+  try { await api("/apps/"+id+"/approve", {method:"PATCH", body: JSON.stringify({approve})}); toast(approve?"Onaylandı":"Reddedildi"); render(); }
+  catch(e){ toast(e.message); }
+}
+async function resolveReport(id){
+  try { await api("/reports/"+id+"/resolve", {method:"PATCH"}); toast("Şikayet kapatıldı"); render(); }
+  catch(e){ toast(e.message); }
+}
+
+async function vSettings(){
+  return backBar("Ayarlar") + '<div class="card"><button class="btn alt full" onclick="if(confirm(\'Emin misin?\')){localStorage.clear();location.reload()}">Cihazdaki verileri temizle (oturum dahil)</button></div>';
+}
+
+function runApp(id){
+  const a = allAppsCache.find(x=>x.id==id);
+  if (!a || !a.code) return toast("Bu uygulamaya kod yüklenmemiş");
   document.getElementById("runName").textContent = a.name;
-  var fr = document.getElementById("runFrame");
-  fr.srcdoc = a.code;
+  document.getElementById("runFrame").srcdoc = a.code;
   document.getElementById("runner").classList.add("open");
 }
-function closeRunner() { document.getElementById("runner").classList.remove("open"); document.getElementById("runFrame").srcdoc = ""; }
+function closeRunner(){ document.getElementById("runner").classList.remove("open"); document.getElementById("runFrame").srcdoc=""; }
 
-function vRewards(m) {
-  return '<h2 style="margin-top:6px">Ödüller ve Görevler</h2>' +
-         '<div class="card"><h3>Günlük Giriş</h3><div class="muted">Her gün girerek puanları topla.</div>' +
-         '<button class="btn full" style="margin-top:10px" onclick="dailyClaim()">Günlük Puanı Al (+100 P)</button></div>';
-}
-function dailyClaim() { var m = me(); if(!m) return tabTo("profile"); m.points += 100; saveMe(m); toast("+100 Puan eklendi!"); render(); }
+document.getElementById("sheetBg").addEventListener("click", e=>{ if(e.target===e.currentTarget) closeSheet(); });
 
-function vFavs() { return backBar("Favorilerim") + '<div class="empty">Henüz favori yok.</div>'; }
-function vBoard() { return backBar("Sıralama") + '<div class="card"><h3>👑 Liderlik Tablosu</h3><div class="muted">1. EYO PAŞA! (Kurucu) - 999.999 P</div></div>'; }
-function vSettings() { return backBar("Ayarlar") + '<div class="card"><button class="btn alt full" onclick="wipe()">Tüm Verileri Sıfırla (Wipe)</button></div>'; }
-function wipe() { if(confirm("Tüm veriler silinsin mi?")) { localStorage.clear(); location.reload(); } }
-function vAbout() { return backBar("Hakkında") + '<div class="card" style="text-align:center"><h3>HÜKÜM STORE</h3><div class="muted">Merkezisiz ve Zırhlı Dijital İmparatorluk Mimarisi. v1.0</div></div>'; }
-
-/* Başlangıç Render */
-render();
+(async function init(){
+  await refreshMe();
+  render();
+})();
 </script>
-
-<link rel="manifest" href="manifest.webmanifest">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="HÜKÜM">
 </body>
 </html>
